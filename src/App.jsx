@@ -1,23 +1,24 @@
-import Intro from "./Landing/Intro"
-import Bar from "./Landing/Bar"
-import Features from './Landing/Features'
-import Findout from "./Landing/Findout"
-import Footer from "./Landing/Footer"
+import { ThemeProvider } from "@emotion/react";
+import { CssBaseline } from "@mui/material";
+import { darkTheme, lightTheme } from "./utils/theme";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/router";
+
+
 
 function App() {
 
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+
   return (
-    <>
-      <header>
-        <Bar />
-        <Intro />
-      </header>
-      <main>
-        <Features />
-        <Findout />
-      </main>
-      <Footer />
-    </>
+    <ThemeProvider theme={prefersDarkMode ? darkTheme : lightTheme}>
+    <CssBaseline />
+    
+      <RouterProvider router={router}/>
+   
+  </ThemeProvider>
   )
 }
 
