@@ -3,10 +3,10 @@ import Constants from "./constants";
 
 const commonTheme = {
   typography: {
-    fontFamily: ["Flex", sans-serif],
+    fontFamily: ["Flex", "sans-serif"],
     button: {
      
-      fontFamily: ["Flex", sans-serif],
+      fontFamily: ["Flex", "sans-serif"],
       textTransform: "none",
       elevation: 0,
       disableRipple: true,
