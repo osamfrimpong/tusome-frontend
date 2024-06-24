@@ -19,7 +19,6 @@ import { useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
-
 const drawerWidth = 240;
 const navItems = ["Quiz", "Questions", "About Us"];
 
@@ -59,7 +58,7 @@ function LandingPagesWrapper(props) {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <AppBar component="nav" elevation={0}>
         <Toolbar>
           <IconButton
@@ -99,24 +98,22 @@ function LandingPagesWrapper(props) {
                 height: "40px",
                 borderRadius: "0px",
                 "&:hover": {
-                    color: Constants.CUSTOM_COLORS.WHITE,
+                  color: Constants.CUSTOM_COLORS.WHITE,
                 },
               }}
             >
               Create Account
             </Button>
-	    <Footer />
           </Box>
         </Toolbar>
       </AppBar>
       <nav>
         <Drawer
-          //   container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -129,25 +126,11 @@ function LandingPagesWrapper(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box component="main" sx={{ p: 3, flexGrow: 1 }}>
         <Toolbar />
         <Outlet />
-        <Grid container sx={{ backgroundColor: Constants.CUSTOM_COLORS.GRAY }}>
-        <Grid item xs={12} sm={3} md={3} sx={{ p: "50px" }}>
-            Footer Column 1
-        </Grid>
-        <Grid item xs={12} sm={3} md={3} sx={{ p: "50px" }}>
-            Footer Column 2
-            </Grid>
-            <Grid item xs={12} sm={3} md={3} sx={{ p: "50px" }}>
-            Footer Column 3
-            </Grid>
-            <Grid item xs={12} sm={3} md={3} sx={{ p: "50px" }}>
-            Footer Column 4
-            </Grid>
-
-      </Grid>
       </Box>
+      <Footer />
     </Box>
   );
 }
