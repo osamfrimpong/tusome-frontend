@@ -130,7 +130,6 @@ function LandingPagesWrapper(props) {
         <Toolbar />
         <Outlet />
       </Box>
-      <Footer />
     </Box>
   );
 }
