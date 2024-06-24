@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
+import Footer from "./Footer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -104,6 +105,7 @@ function LandingPagesWrapper(props) {
             >
               Create Account
             </Button>
+	    <Footer />
           </Box>
         </Toolbar>
       </AppBar>
