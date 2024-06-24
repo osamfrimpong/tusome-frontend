@@ -20,8 +20,7 @@ function Footer() {
             About Us
           </Typography>
           <Typography variant="body2" sx={{ mb: 2 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            eget mauris id purus aliquet porttitor.
+            Revolutionizing e-learning by providing comprehensive exam preparation resources
           </Typography>
           <Button
             variant="outlined"
