@@ -1,3 +1,5 @@
+// LandingPagesWrapper.jsx
+
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -113,7 +115,7 @@ function LandingPagesWrapper(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true,
+            keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -126,10 +128,10 @@ function LandingPagesWrapper(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 3, flexGrow: 1 }}>
-        <Toolbar />
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Outlet />
       </Box>
+      <Footer />
     </Box>
   );
 }
