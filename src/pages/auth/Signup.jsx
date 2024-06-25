@@ -11,9 +11,13 @@ import Box from "@mui/material/Box"
 import AccountBoxIcon from "@mui/icons-material/AccountBox"
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
+import { useTheme } from "@mui/material"
+
 
 
 export default function SignUp() {
+  const theme = useTheme();
+
   const handleSubmit = event => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
@@ -34,7 +38,7 @@ export default function SignUp() {
             alignItems: "center"
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "white" }}>
+          <Avatar sx={{ m: 1, bgcolor: theme }}>
             <AccountBoxIcon/>
           </Avatar>
           <Typography component="h1" variant="h5">
