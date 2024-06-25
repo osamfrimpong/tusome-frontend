@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, NavLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Constants from "../../utils/constants";
 import { useTheme } from "@mui/material";
@@ -22,7 +22,10 @@ import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
 const drawerWidth = 240;
-const navItems = ["Quiz", "Questions", "About Us"];
+const navItems = [  { label: "Quiz", link: "/quiz" },
+  { label: "Questions", link: "/questions" },
+  { label: "About Us", link: "/about-us" },
+];
 
 function LandingPagesWrapper(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -38,24 +41,23 @@ function LandingPagesWrapper(props) {
       <Typography sx={{ my: 2, fontWeight: 700 }}>Tusome</Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-        <ListItem
-          disablePadding
-          sx={{ border: "1px solid", justifyContent: "center" }}
-        >
-          <ListItemButton sx={{ textAlign: "center" }}>
-            <Link to="/signup">
-              <ListItemText primary="Create Account" />
-            </Link>
-          </ListItemButton>
-        </ListItem>
-      </List>
+  {navItems.map((item) => (
+    <ListItem key={item.label} disablePadding>
+      <ListItemButton sx={{ textAlign: "center" }}>
+        <Link to={item.link}>
+          <ListItemText primary={item.label} />
+        </Link>
+      </ListItemButton>
+    </ListItem>
+  ))}
+  <ListItem disablePadding sx={{ border: "1px solid", justifyContent: "center" }}>
+    <ListItemButton sx={{ textAlign: "center" }}>
+      <Link to="/signup">
+        <ListItemText primary="Create Account" />
+      </Link>
+    </ListItemButton>
+  </ListItem>
+</List>
     </Box>
   );
 
@@ -83,30 +85,30 @@ function LandingPagesWrapper(props) {
             Tusome
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
-            ))}
-            <Button
-              variant="contained"
-              disableElevation
-              disableRipple
-              onClick={() => navigate("/signup")}
-              sx={{
-                backgroundColor: Constants.CUSTOM_COLORS.WHITE,
-                color: Constants.CUSTOM_COLORS.MAIN_TEAL,
-                textTransform: "none",
-                height: "40px",
-                borderRadius: "0px",
-                "&:hover": {
-                  color: Constants.CUSTOM_COLORS.WHITE,
-                },
-              }}
-            >
-              Create Account
-            </Button>
-          </Box>
+          {navItems.map((item) => (
+    <Button key={item.label} sx={{ color: "#fff" }} component={Link} to={item.link}>
+      {item.label}
+    </Button>
+  ))}
+  <Button
+    variant="contained"
+    disableElevation
+    disableRipple
+    onClick={() => navigate("/signup")}
+    sx={{
+      backgroundColor: Constants.CUSTOM_COLORS.WHITE,
+      color: Constants.CUSTOM_COLORS.MAIN_TEAL,
+      textTransform: "none",
+      height: "40px",
+      borderRadius: "0px",
+      "&:hover": {
+        color: Constants.CUSTOM_COLORS.WHITE,
+      },
+    }}
+  >
+    Create Account
+  </Button>
+</Box>
         </Toolbar>
       </AppBar>
       <nav>
@@ -137,3 +139,4 @@ function LandingPagesWrapper(props) {
 }
 
 export default LandingPagesWrapper;
+
