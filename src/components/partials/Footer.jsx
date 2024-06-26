@@ -47,7 +47,7 @@ function Footer() {
               Contact Us
             </Link>
             <Link href="/terms" color="inherit" underline="hover" sx={{ display: "block", mb: 1 }}>
-              Terms of Service
+              Terms & Condition
             </Link>
             <Link href="/privacy" color="inherit" underline="hover" sx={{ display: "block", mb: 1 }}>
               Privacy Policy
