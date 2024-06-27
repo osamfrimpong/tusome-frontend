@@ -12,10 +12,19 @@ function Privacy() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="md">
+      <Container maxWidth="md"
+      style={{
+        overflowY: 'auto',
+        height: '100vh',
+        padding:'20px',
+        boxSizing:'border-box',
+      }}
+      >
+        <div style={{ marginTop: '40px' }}>
         <Typography variant="h2" gutterBottom>
           Privacy Policy
         </Typography>
+        </div>
         <Typography variant="body1" gutterBottom>
           This privacy policy outlines how we collect, use, and protect your personal information.
         </Typography>

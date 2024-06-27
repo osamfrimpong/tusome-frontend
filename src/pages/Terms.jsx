@@ -9,9 +9,11 @@ const theme = useTheme();
       <Container maxWidth="md" sx={{ py: 4 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
+          <div style={{ marginTop: '40px' }}>
             <Typography variant="h2" component="h2" gutterBottom>
               Terms & Condition
             </Typography>
+            </div>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body1" gutterBottom>
@@ -66,13 +68,7 @@ const theme = useTheme();
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Divider sx={{ my: 2 }} />
           </Grid>
-          <Box sx={{  pt: 3, mt: 3 }}>
-        <Typography variant="body2" sx={{ textAlign: "center" }}>
-          &copy; {new Date().getFullYear()} Tusome. All rights reserved.
-        </Typography>
-          </Box>
         </Grid>
       </Container>
   );

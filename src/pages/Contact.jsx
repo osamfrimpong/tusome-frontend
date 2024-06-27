@@ -12,9 +12,11 @@ const theme = useTheme();
       <Container maxWidth="md" sx={{ py: 4 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
+          <div style={{ marginTop: '40px' }}>
             <Typography variant="h2" component="h2" gutterBottom>
               Contact Us
             </Typography>
+            </div>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
