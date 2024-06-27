@@ -15,7 +15,15 @@ import LandingPagesWrapper from "../components/layouts/LandingPagesWrapper";
 const router = createBrowserRouter([
   {
     element: <LandingPagesWrapper />,
-    children: [{ path: "/", element: <HomePage /> }],
+    children: [{ path: "/", element: <HomePage /> },
+      { path: "/about-us", element: <AboutUs /> },
+      { path: "/quiz", element: <Quiz /> },
+      { path: "/faq", element: <Faq /> },
+      { path: "/terms", element: <Terms /> },
+      { path: "/privacy", element: <Privacy /> },
+      { path: "/contact", element: <Contact /> },
+
+    ],
   },
   { path: "/signup", element: <Signup /> },
   { path: "/login", element: <Login /> },

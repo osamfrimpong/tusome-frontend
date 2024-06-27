@@ -12,7 +12,9 @@ function faq() {
     <ThemeProvider theme={theme}>
       <Accordion>
         <AccordionSummary>
+        <div style={{ marginTop: '40px' }}>
           <Typography>Question 1</Typography>
+          </div>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>Answer 1</Typography>
