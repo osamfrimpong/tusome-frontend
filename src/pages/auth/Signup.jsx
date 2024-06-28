@@ -5,15 +5,14 @@ import CssBaseline from "@mui/material/CssBaseline"
 import TextField from "@mui/material/TextField"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Checkbox from "@mui/material/Checkbox"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import AccountBoxIcon from "@mui/icons-material/AccountBox"
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import { useTheme } from "@mui/material"
-
-
+import axios from 'axios';
 
 export default function SignUp() {
   const theme = useTheme();
@@ -21,10 +20,21 @@ export default function SignUp() {
   const handleSubmit = event => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get("email"),
-      password: data.get("password")
-    })
+    const formData = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      email: data.get('email'),
+      password: data.get('password'),
+      allowExtraEmails: data.get('allowExtraEmails') === 'on'? true : false,
+    };
+
+    axios.post('https://tusome-06769d862471.herokuapp.com/api/register', formData)
+     .then(response => {
+        console.log(response);
+      })
+     .catch(error => {
+        console.error(error);
+      });
   }
 
   return (
