@@ -12,20 +12,33 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useTheme } from "@mui/material";
+import axios from 'axios';
+
 
 
 export default function SignUp() {
   const theme = useTheme();
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
+  const handleSubmit = event => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    const formData = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
-    });
-  };
+      allowExtraEmails: data.get('allowExtraEmails') === 'on'? true : false,
+    };
+
+    axios.post('https://tusome-06769d862471.herokuapp.com/api/register', formData)
+     .then(response => {
+        console.log(response);
+      })
+     .catch(error => {
+        console.error(error);
+      });
+  }
 
   return (
       <Container component="main" maxWidth="xs">
