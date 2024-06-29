@@ -10,7 +10,6 @@
     - [Installation Process](#installation-process)
       - [Usage](#usage)
       - [Contributing](#contributing)
-  - [Related projects](#related-projects)
   - [Licensing](#licensing)
 
 ## Introduction
@@ -25,8 +24,8 @@ Our project is deployed and is live at [https://tusome-xi.vercel.app](https://tu
 
 ### Authors
 - Dr. (Med) Schandorf Osam-Frimpong - [LinkedIn](https://www.linkedin.com/in/schandorf-osam-frimpong-md-290958192) | [Github](https://gitub.com/osamfrimpong)
-- Mr Richard Senyo Gadasu - [LinkedIn]() | [Github]()
-- Mrs Grace Letiwa - [LinkedIn]() | [Github]()
+- Mr Richard Senyo Gadasu - [LinkedIn](https://www.linkedin.com/in/richard-senyo-gadasu/) | [Github](https://github.com/Senyo197/)
+- Mrs Grace Letiwa - [LinkedIn](https://www.linkedin.com/in/grace-letiwa) | [Github](https://github.com/GLetiwa)
 - Mr. Edmund Adanor Mensah  - [LinkedIn](https://www.linkedin.com/in/edmund-mensah-2781861a8) | [Github](https://github.com/mr-mensah)
 
 ## Installation
@@ -38,7 +37,7 @@ Our project is deployed and is live at [https://tusome-xi.vercel.app](https://tu
 ### Installation Process
 1. Clone the repository
 ```
-git clone  https://github.com/osamfrimpong/tusome.git
+git clone  https://github.com/osamfrimpong/tusome-front.git
 ```
 2. Change directory into the project folder
 ```
