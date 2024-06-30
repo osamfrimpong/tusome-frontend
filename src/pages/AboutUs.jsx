@@ -61,7 +61,8 @@ const AboutUs = () => {
               </Typography>
               <Typography variant="body1" gutterBottom>
                 1. Create Easily create an account <br/>
-                2. Browse 
+                2. Browse Through Questions <br/>
+                3. Solve Questions and have Fun
 
               </Typography>
             </Grid>
