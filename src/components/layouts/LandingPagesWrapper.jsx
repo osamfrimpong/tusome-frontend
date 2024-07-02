@@ -39,7 +39,11 @@ function LandingPagesWrapper(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center", backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL, color: "#fff" }}>
-      <Typography sx={{ my: 2, fontWeight: 700, color: "#fff" }}>Tusome</Typography>
+      <Link to="/">
+      <Typography sx={{ my: 2, fontWeight: 700, color: "#fff" }}> 
+       <span style={{ color: "#fff" }}>Tusome</span> 
+      </Typography>      
+    </Link>
       <Divider sx={{ borderColor: "#fff" }} />
       <List>
         {navItems.map((item) => (
@@ -84,7 +88,9 @@ function LandingPagesWrapper(props) {
               color: "#fff",
             }}
           >
-            Tusome
+            <Link to="/">
+            <span style={{ color: "#fff" }}>Tusome</span>
+            </Link>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (

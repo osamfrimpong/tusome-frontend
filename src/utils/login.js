@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import {Link} from "react-router-dom"
+import {Link, useNavigate  } from "react-router-dom"
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import AccountBoxIcon from "@mui/icons-material/AccountBox"
@@ -16,6 +16,7 @@ import { useTheme } from "@mui/material";
 
 export default function Login() {
     const theme = useTheme();
+    const navigate = useNavigate();
     
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,6 +25,7 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    navigate("/dashboard", { replace: true });
   };
 
   return (

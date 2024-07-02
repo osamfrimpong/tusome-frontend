@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline"
 import TextField from "@mui/material/TextField"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Checkbox from "@mui/material/Checkbox"
-import { Link } from "react-router-dom"
+import { Link, useNavigate  } from "react-router-dom"
 import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import AccountBoxIcon from "@mui/icons-material/AccountBox"
@@ -16,6 +16,8 @@ import axios from 'axios';
 
 export default function SignUp() {
   const theme = useTheme();
+  const navigate = useNavigate();
+
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -31,6 +33,7 @@ export default function SignUp() {
     axios.post('https://tusome-06769d862471.herokuapp.com/api/register', formData)
      .then(response => {
         console.log(response);
+        navigate("/dashboard", { replace: true }); // Redirect to dashboard
       })
      .catch(error => {
         console.error(error);

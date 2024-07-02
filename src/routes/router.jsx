@@ -10,6 +10,9 @@ import Contact from "../pages/Contact";
 import Terms from "../pages/Terms";
 import Privacy from "../pages/Privacy";
 import ForgotPassword from "../pages/ForgotPassword";
+import UserDashboard from "../pages/UserDashboard";
+import Edit from "../pages/Edit";
+import ChangePassword from "../pages/ChangePassword";
 import LandingPagesWrapper from "../components/layouts/LandingPagesWrapper";
 
 
@@ -23,6 +26,8 @@ const router = createBrowserRouter([
       { path: "/terms", element: <Terms /> },
       { path: "/privacy", element: <Privacy /> },
       { path: "/contact", element: <Contact /> },
+    
+
 
     ],
   },
@@ -36,6 +41,11 @@ const router = createBrowserRouter([
   { path: "/terms", element: <Terms /> },
   { path: "/privacy", element: <Privacy /> },
   { path: "/forgot", element: <ForgotPassword /> },
+  { path: "/dashboard", element: <UserDashboard /> },
+  { path: "/edit", element: <Edit /> },
+{ path: "/change-password", element: <ChangePassword /> },
+
+
 
 
 
