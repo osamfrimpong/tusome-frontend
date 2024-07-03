@@ -14,19 +14,19 @@ const UserDashboard = () => {
   const [quizzesCompleted, setQuizzesCompleted] = useState(3);
   const [totalQuizzes, setTotalQuizzes] = useState(10);
   const [recentActivity, setRecentActivity] = useState([
-    { title: 'Completed Quiz 1', date: '2023-02-20' },
-    { title: 'Completed Quiz 2', date: '2023-02-22' },
-    { title: 'Completed Quiz 3', date: '2023-02-25' },
+    { title: 'Completed Quiz 1', date: '2024-06-29' },
+    { title: 'Completed Quiz 2', date: '2024-06-29' },
+    { title: 'Completed Quiz 3', date: '2024-06-29' },
   ]);
   const [myQuestions, setMyQuestions] = useState([
-    { title: 'Question 1', date: '2023-02-20' },
-    { title: 'Question 2', date: '2023-02-22' },
-    { title: 'Question 3', date: '2023-02-25' },
+    { title: 'Question 1', date: '2024-06-29' },
+    { title: 'Question 2', date: '2024-06-29' },
+    { title: 'Question 3', date: '2024-06-29' },
   ]);
   const [favorites, setFavorites] = useState([
-    { title: 'Favorite Question 1', date: '2023-02-20' },
-    { title: 'Favorite Question 2', date: '2023-02-22' },
-    { title: 'Favorite Question 3', date: '2023-02-25' },
+    { title: 'Favorite Question 1', date: '2024-06-29' },
+    { title: 'Favorite Question 2', date: '2024-06-29' },
+    { title: 'Favorite Question 3', date: '2024-06-29' },
   ]);
   const [progressTracking, setProgressTracking] = useState([
     { title: 'Quiz 1', progress: 50 },
@@ -34,9 +34,9 @@ const UserDashboard = () => {
     { title: 'Quiz 3', progress: 100 },
   ]);
   const [notifications, setNotifications] = useState([
-    { title: 'New Quiz Available', date: '2023-02-20' },
-    { title: 'New Question Added', date: '2023-02-22' },
-    { title: 'Quiz Completion Reminder', date: '2023-02-25' },
+    { title: 'New Quiz Available', date: '2024-06-29' },
+    { title: 'New Question Added', date: '2024-06-29' },
+    { title: 'Quiz Completion Reminder', date: '2024-06-29' },
   ]);
 
   const handleLogout = () => {
@@ -72,6 +72,12 @@ const UserDashboard = () => {
   }}
 >
   <List sx={{ width: 240 }} onClick={toggleDrawer}>
+    <Button component={Link} to="/questions">
+      <ListItemText primary="Questions"/>
+    </Button><br/>
+    <Button component={Link} to="/quiz">
+      <ListItemText primary="Quizes"/>
+    </Button><br/>
     <Button component={Link} to="/edit">
       <ListItemText primary="Edit Profile"/>
     </Button><br/>
