@@ -13,12 +13,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import axios from "axios";
-import { useIndexedDB } from "./IndexedDB"; // Adjust the path as per your file structure
+import { useDB } from "./IndexedDB"; // Adjust the path as per your file structure
 
 export default function SignUp() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const db = useIndexedDB();
+  const db = useDB();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

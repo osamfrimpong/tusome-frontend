@@ -13,13 +13,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import axios from "axios";
-import IndexedDB from "./IndexedDB"; // Adjust import path as needed
+import { useDB } from "./IndexedDB"; // Adjust import path as needed
 
 export default function SignIn() {
   const theme = useTheme();
   const navigate = useNavigate();
+  const db = useDB();
 
-  const handleSubmit = async (event, db) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const formData = {
@@ -53,77 +54,70 @@ export default function SignIn() {
   };
 
   return (
-    <IndexedDB>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: theme }}>
-            <AccountBoxIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={(event) => handleSubmit(event, db)}
-            noValidate
-            sx={{ mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
+          <AccountBoxIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to="/forgot" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                Don't have an account?{" "}
-                <Link to="/signup" variant="body2">
-                  Sign Up
-                </Link>
-              </Grid>
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link to="/forgot" variant="body2">
+                Forgot password?
+              </Link>
             </Grid>
-          </Box>
+            <Grid item>
+              Don't have an account?{" "}
+              <Link to="/signup" variant="body2">
+                Sign Up
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
-      </Container>
-    </IndexedDB>
+      </Box>
+    </Container>
   );
 }
