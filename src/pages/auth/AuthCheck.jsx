@@ -10,7 +10,7 @@ const AuthCheck = ({ children }) => {
     const checkAuth = async () => {
       try {
         const response = await axios.get(
-          "https://tusome-06769d862471.herokuapp.com/api/auth-check",
+          "https://tusome-06769d862471.herokuapp.com/auth-check",
           {
             withCredentials: true, // Include cookies in the request
           }
