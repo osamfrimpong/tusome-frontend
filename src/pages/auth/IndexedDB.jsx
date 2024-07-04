@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { openDB } from "idb";
 
+const IndexedDBContext = createContext(null);
+
+export const useIndexedDB = () => {
+  return useContext(IndexedDBContext);
+};
+
 const IndexedDB = ({ children }) => {
-  const [db, setDB] = useState(null);
+  const [db, setDb] = useState(null);
 
   useEffect(() => {
-    const initializeDB = async () => {
-      try {
-        const instance = await openDB("auth", 1, {
-          upgrade(db) {
-            db.createObjectStore("tokens");
-          },
-        });
-        setDB(instance);
-      } catch (error) {
-        console.error("Failed to initialize IndexedDB", error);
-      }
+    const initDB = async () => {
+      const database = await openDB("my-database", 1, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains("tokens")) {
+            db.createObjectStore("tokens", { keyPath: "email" });
+          }
+        },
+      });
+      setDb(database);
     };
 
-    initializeDB();
+    initDB();
   }, []);
 
-  return db ? React.cloneElement(children, { db }) : null;
+  return (
+    <IndexedDBContext.Provider value={db}>{children}</IndexedDBContext.Provider>
+  );
 };
 
 export default IndexedDB;
