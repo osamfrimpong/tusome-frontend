@@ -31,7 +31,7 @@ export default function SignUp() {
     };
 
     axios
-      .post("http://127.0.0.1:8000/register", formData)
+      .post("https://tusome-06769d862471.herokuapp.com/api/register", formData)
       .then((response) => {
         // Store email in IndexedDB upon successful registration
         const tx = db.transaction("tokens", "readwrite");

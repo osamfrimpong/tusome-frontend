@@ -9,9 +9,12 @@ const AuthCheck = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/auth-check", {
-          withCredentials: true, // Include cookies in the request
-        });
+        const response = await axios.get(
+          "https://tusome-06769d862471.herokuapp.com/api/auth-check",
+          {
+            withCredentials: true, // Include cookies in the request
+          }
+        );
         setIsAuthenticated(response.data.authenticated);
         if (!response.data.authenticated) {
           navigate("/login");
