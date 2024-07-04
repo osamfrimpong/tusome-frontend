@@ -1,13 +1,49 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Box, Grid, Typography, Button, Container } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import IntroImage from "../assets/images/seems.jpg";
 import Constants from "../utils/constants";
-import { useNavigate } from "react-router-dom";
 
-export default function HomePage() {
+const isAuthenticated = async () => {
+  try {
+    const response = await axios.get(
+      "https://http://tusome-06769d862471.herokuapp.com/auth-check",
+      {
+        withCredentials: true, // Include cookies in the request
+      }
+    );
+    return response.data.authenticated;
+  } catch (error) {
+    console.error("Authentication check failed", error);
+    return false;
+  }
+};
+
+const HomePage = () => {
+  const [authChecked, setAuthChecked] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const auth = await isAuthenticated();
+      if (!auth) {
+        navigate("/login");
+      } else {
+        setAuthChecked(true);
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
+
+  if (!authChecked) {
+    return <p>Loading...</p>; // Show a loading message or spinner while checking authentication
+  }
+
   return (
     <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      {/* Your existing HomePage content here */}
       <Grid container sx={{ backgroundColor: "#006D5B", py: 10 }}>
         <Grid item xs={12} sm={8} md={8} sx={{ p: 5, pl: 10 }}>
           <Typography
@@ -37,7 +73,12 @@ export default function HomePage() {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4} md={4} sx={{ p: 5, pr: 10 }}>
-          <Box component="img" src={IntroImage} alt="seems" sx={{ borderRadius: 10, width: 500, height: 250}} />
+          <Box
+            component="img"
+            src={IntroImage}
+            alt="seems"
+            sx={{ borderRadius: 10, width: 500, height: 250 }}
+          />
         </Grid>
       </Grid>
       <Container maxWidth="lg" sx={{ py: 10 }}>
@@ -83,7 +124,14 @@ export default function HomePage() {
             borderRadius: 10,
           }}
         >
-          <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 36, color: Constants.CUSTOM_COLORS.WHITE }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 700,
+              fontSize: 36,
+              color: Constants.CUSTOM_COLORS.WHITE,
+            }}
+          >
             Find out about the quizzes
           </Typography>
           <Button
@@ -104,4 +152,6 @@ export default function HomePage() {
       </Container>
     </Box>
   );
-}
+};
+
+export default HomePage;
