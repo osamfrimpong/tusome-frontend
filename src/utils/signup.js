@@ -1,22 +1,25 @@
-import * as React from "react"
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import CssBaseline from "@mui/material/CssBaseline"
-import TextField from "@mui/material/TextField"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import Checkbox from "@mui/material/Checkbox"
-import { Link, useNavigate  } from "react-router-dom"
-import Grid from "@mui/material/Grid"
-import Box from "@mui/material/Box"
-import AccountBoxIcon from "@mui/icons-material/AccountBox"
-import Typography from "@mui/material/Typography"
-import Container from "@mui/material/Container"
-import { useTheme } from "@mui/material"
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import {Link, useNavigate } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { useTheme } from "@mui/material";
 import axios from 'axios';
+
+
 
 export default function SignUp() {
   const theme = useTheme();
   const navigate = useNavigate();
+
 
 
   const handleSubmit = event => {
@@ -46,23 +49,18 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: theme }}>
-            <AccountBoxIcon/>
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -108,10 +106,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="Receive updates from us. Unsubscribe anytime."
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
@@ -125,12 +121,13 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                  Already have an account?<Link to ="/login" variant="body2"> Sign in
+                
+                  Already have an account?<Link to = "/login" variant="body2"> Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
       </Container>
-  )
+  );
 }

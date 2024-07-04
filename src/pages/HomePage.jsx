@@ -36,7 +36,7 @@ export default function HomePage() {
             better learning and exam preparation.
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={4} md={4} sx={{ p: 5, pr: 10 }}>
+        <Grid item xs={15} sm={6} md={4} sx={{ p: 10, pr: 10,}}>
           <Box component="img" src={IntroImage} alt="seems" sx={{ borderRadius: 10, width: 500, height: 250}} />
         </Grid>
       </Grid>
@@ -87,16 +87,9 @@ export default function HomePage() {
             Find out about the quizzes
           </Typography>
           <Button
-            variant="contained"
+            variant="outlined"
             onClick={() => navigate("/quiz")}
-            sx={{
-              backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-              color: Constants.CUSTOM_COLORS.WHITE,
-              borderRadius: "0px",
-              height: "40px",
-              textTransform: "none",
-              "&:hover": { backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL },
-            }}
+            sx={{ color: Constants.CUSTOM_COLORS.WHITE, borderColor: Constants.CUSTOM_COLORS.WHITE }}
           >
             View Quizzes
           </Button>

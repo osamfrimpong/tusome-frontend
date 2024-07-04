@@ -1,33 +1,32 @@
-import * as React from "react"
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import CssBaseline from "@mui/material/CssBaseline"
-import TextField from "@mui/material/TextField"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import Checkbox from "@mui/material/Checkbox"
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import {Link, useNavigate  } from "react-router-dom"
-import Grid from "@mui/material/Grid"
-import Box from "@mui/material/Box"
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import AccountBoxIcon from "@mui/icons-material/AccountBox"
-import Typography from "@mui/material/Typography"
-import Container from "@mui/material/Container"
-import { useTheme } from "@mui/material"
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { useTheme } from "@mui/material";
 
 
-export default function SignIn() {
-  const theme = useTheme();
-  const navigate = useNavigate();
-
-  
-  const handleSubmit = event => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
+export default function Login() {
+    const theme = useTheme();
+    const navigate = useNavigate();
+    
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
-      password: data.get("password")
-    })
+      email: data.get('email'),
+      password: data.get('password'),
+    });
     navigate("/dashboard", { replace: true });
-  }
+  };
 
   return (
       <Container component="main" maxWidth="xs">
@@ -35,9 +34,9 @@ export default function SignIn() {
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: theme }}>
@@ -46,12 +45,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -91,13 +85,12 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                
-                  Don't have an account? <Link to ="/signup" variant="body2">  Sign Up
+                  Don't have an account?<Link to="/signup" variant="body2"> Sign Up
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
       </Container>
-  )
+  );
 }
