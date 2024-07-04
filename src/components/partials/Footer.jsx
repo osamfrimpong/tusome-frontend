@@ -1,8 +1,11 @@
 import * as React from "react";
 import { Box, Grid, Typography, Link, Button } from "@mui/material";
 import Constants from "../../utils/constants";
+import { useNavigate } from "react-router-dom";
+
 
 function Footer() {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -23,9 +26,8 @@ function Footer() {
             Revolutionizing e-learning by providing comprehensive exam preparation resources
           </Typography>
           <Button
+          onClick={() => navigate("/about-us")}
             variant="outlined"
-            component={Link}
-            href="/about"
             sx={{ color: Constants.CUSTOM_COLORS.WHITE, borderColor: Constants.CUSTOM_COLORS.WHITE }}
           >
             Learn More
@@ -45,7 +47,7 @@ function Footer() {
               Contact Us
             </Link>
             <Link href="/terms" color="inherit" underline="hover" sx={{ display: "block", mb: 1 }}>
-              Terms of Service
+              Terms & Condition
             </Link>
             <Link href="/privacy" color="inherit" underline="hover" sx={{ display: "block", mb: 1 }}>
               Privacy Policy

@@ -17,6 +17,21 @@ const quizData = [
     question: 'Who painted the Mona Lisa?',
     options: ['Vincent van Gogh', 'Leonardo da Vinci', 'Pablo Picasso', 'Michelangelo'],
     correctAnswer: 'Leonardo da Vinci'
+  },
+  {
+    question: 'What is the largest ocean on Earth?',
+    options: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
+    correctAnswer: 'Pacific Ocean'
+  },
+  {
+    question: 'Which is the longest river in the world?',
+    options: ['Nile', 'Amazon', 'Yangtze', 'Mississippi'],
+    correctAnswer: 'Nile'
+  },
+  {
+    question: 'Who wrote the play "Romeo and Juliet"?',
+    options: ['William Shakespeare', 'Jane Austen', 'Charles Dickens', 'Mark Twain'],
+    correctAnswer: 'William Shakespeare'
   }
 ];
 
