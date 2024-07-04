@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import { openDB } from "idb";
 
-const IndexedDBContext = createContext(null);
+const DBContext = createContext();
 
-export const useIndexedDB = () => {
-  return useContext(IndexedDBContext);
+export const useDB = () => {
+  return useContext(DBContext);
 };
 
 const IndexedDB = ({ children }) => {
@@ -12,22 +12,24 @@ const IndexedDB = ({ children }) => {
 
   useEffect(() => {
     const initDB = async () => {
-      const database = await openDB("my-database", 1, {
-        upgrade(db) {
-          if (!db.objectStoreNames.contains("tokens")) {
-            db.createObjectStore("tokens", { keyPath: "email" });
-          }
-        },
-      });
-      setDb(database);
+      try {
+        const database = await openDB("MyDatabase", 1, {
+          upgrade(db) {
+            if (!db.objectStoreNames.contains("tokens")) {
+              db.createObjectStore("tokens");
+            }
+          },
+        });
+        setDb(database);
+      } catch (error) {
+        console.error("Failed to open DB", error);
+      }
     };
 
     initDB();
   }, []);
 
-  return (
-    <IndexedDBContext.Provider value={db}>{children}</IndexedDBContext.Provider>
-  );
+  return <DBContext.Provider value={db}>{children}</DBContext.Provider>;
 };
 
 export default IndexedDB;

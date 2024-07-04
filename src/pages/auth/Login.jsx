@@ -34,17 +34,21 @@ export default function SignIn() {
       );
       console.log(response);
 
-      // Store token in IndexedDB
-      const tx = db.transaction("tokens", "readwrite");
-      tx.objectStore("tokens").put(response.data.token, "token");
-      await tx.done;
+      if (db) {
+        // Store token in IndexedDB
+        const tx = db.transaction("tokens", "readwrite");
+        tx.objectStore("tokens").put(response.data.token, "token");
+        await tx.done;
 
-      // Optionally store in localStorage as well
-      localStorage.setItem("token", response.data.token);
+        // Optionally store in localStorage as well
+        //localStorage.setItem("token", response.data.token);
+        //} else {
+        //  console.error("Database is not available");
+      }
 
       navigate("/dashboard", { replace: true }); // Redirect to dashboard
     } catch (error) {
-      console.error(error);
+      console.error("Error during login:", error);
     }
   };
 
@@ -68,7 +72,7 @@ export default function SignIn() {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={(event) => handleSubmit(event, db)}
             noValidate
             sx={{ mt: 1 }}
           >
