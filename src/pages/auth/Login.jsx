@@ -32,25 +32,26 @@ export default function SignIn() {
       return;
     }
 
-    const formData = { email, password };
+    const formData = {
+      email,
+      password,
+    };
 
     try {
       const response = await axios.post(
         "https://tusome-06769d862471.herokuapp.com/api/login",
         formData
       );
+      console.log(response);
 
-      if (response.data && response.data.token) {
-        if (db) {
-          // Store token in IndexedDB
-          const tx = db.transaction("tokens", "readwrite");
-          tx.objectStore("tokens").put(response.data.token, "token");
-          await tx.done;
-        }
-        navigate("/dashboard", { replace: true }); // Redirect to dashboard
-      } else {
-        setError("Invalid login credentials");
+      if (db) {
+        // Store token in IndexedDB
+        const tx = db.transaction("tokens", "readwrite");
+        tx.objectStore("tokens").put(response.data.token, "token");
+        await tx.done;
       }
+
+      navigate("/dashboard", { replace: true }); // Redirect to dashboard
     } catch (error) {
       console.error("Error during login:", error);
       setError("Login failed. Please check your credentials and try again.");
