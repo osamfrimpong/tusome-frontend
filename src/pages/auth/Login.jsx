@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,13 +19,22 @@ export default function SignIn() {
   const theme = useTheme();
   const navigate = useNavigate();
   const db = useDB();
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get("email");
+    const password = data.get("password");
+
+    if (!email || !password) {
+      setError("Both email and password are required");
+      return;
+    }
+
     const formData = {
-      email: data.get("email"),
-      password: data.get("password"),
+      email,
+      password,
     };
 
     try {
@@ -40,16 +49,12 @@ export default function SignIn() {
         const tx = db.transaction("tokens", "readwrite");
         tx.objectStore("tokens").put(response.data.token, "token");
         await tx.done;
-
-        // Optionally store in localStorage as well
-        //localStorage.setItem("token", response.data.token);
-        //} else {
-        //  console.error("Database is not available");
       }
 
       navigate("/dashboard", { replace: true }); // Redirect to dashboard
     } catch (error) {
       console.error("Error during login:", error);
+      setError("Login failed. Please check your credentials and try again.");
     }
   };
 
@@ -80,6 +85,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            error={Boolean(error)}
           />
           <TextField
             margin="normal"
@@ -90,7 +96,13 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            error={Boolean(error)}
           />
+          {error && (
+            <Typography color="error" variant="body2">
+              {error}
+            </Typography>
+          )}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

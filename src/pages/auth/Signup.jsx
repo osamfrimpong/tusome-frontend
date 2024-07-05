@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,16 +19,28 @@ export default function SignUp() {
   const theme = useTheme();
   const navigate = useNavigate();
   const db = useDB();
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const firstName = data.get("firstName");
+    const lastName = data.get("lastName");
+    const email = data.get("email");
+    const password = data.get("password");
+    const allowExtraEmails = data.get("allowExtraEmails") === "on";
+
+    if (!firstName || !lastName || !email || !password) {
+      setError("All fields are required");
+      return;
+    }
+
     const formData = {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      allowExtraEmails: data.get("allowExtraEmails") === "on",
+      firstName,
+      lastName,
+      email,
+      password,
+      allowExtraEmails,
     };
 
     try {
@@ -43,6 +55,7 @@ export default function SignUp() {
       navigate("/dashboard", { replace: true }); // Redirect to dashboard
     } catch (error) {
       console.error("Registration failed", error);
+      setError("Registration failed. Please check your details and try again.");
     }
   };
 
@@ -74,6 +87,7 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                error={Boolean(error)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -84,6 +98,7 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
+                error={Boolean(error)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -94,6 +109,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                error={Boolean(error)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,8 +121,16 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                error={Boolean(error)}
               />
             </Grid>
+            {error && (
+              <Grid item xs={12}>
+                <Typography color="error" variant="body2">
+                  {error}
+                </Typography>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -124,7 +148,7 @@ export default function SignUp() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              Already have an account?
+              Already have an account?{" "}
               <Link to="/login" variant="body2">
                 Sign in
               </Link>
