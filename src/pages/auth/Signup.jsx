@@ -34,8 +34,7 @@ export default function SignUp() {
     }
 
     const formData = {
-      firstName,
-      lastName,
+      name: `${firstName} ${lastName}`,
       email,
       password,
       allowExtraEmails,
@@ -47,7 +46,7 @@ export default function SignUp() {
         formData
       );
       console.log(response);
-      navigate("/dashboard", { replace: true }); // Redirect to dashboard
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       console.error("Registration failed", error);
       setError("Registration failed. Please check your details and try again.");
