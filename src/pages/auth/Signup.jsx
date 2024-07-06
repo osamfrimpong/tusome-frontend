@@ -13,12 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import axios from "axios";
-import { useDB } from "./IndexedDB"; // Adjust the path as per your file structure
 
 export default function SignUp() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const db = useDB();
   const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
@@ -48,10 +46,7 @@ export default function SignUp() {
         "https://tusome-06769d862471.herokuapp.com/api/register",
         formData
       );
-      if (db) {
-        const tx = db.transaction("tokens", "readwrite");
-        await tx.store.add({ email: formData.email });
-      }
+      console.log(response);
       navigate("/dashboard", { replace: true }); // Redirect to dashboard
     } catch (error) {
       console.error("Registration failed", error);

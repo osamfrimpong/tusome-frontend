@@ -13,12 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import axios from "axios";
-import { useDB } from "./IndexedDB"; // Adjust import path as needed
 
 export default function SignIn() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const db = useDB();
   const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
@@ -43,13 +41,6 @@ export default function SignIn() {
         formData
       );
       console.log(response);
-
-      if (db) {
-        // Store token in IndexedDB
-        const tx = db.transaction("tokens", "readwrite");
-        tx.objectStore("tokens").put(response.data.token, "token");
-        await tx.done;
-      }
 
       navigate("/dashboard", { replace: true }); // Redirect to dashboard
     } catch (error) {
