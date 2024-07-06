@@ -40,12 +40,17 @@ export default function SignIn() {
         "https://tusome-06769d862471.herokuapp.com/api/login",
         formData
       );
-      console.log(response);
 
-      navigate("/dashboard", { replace: true }); // Redirect to dashboard
+      if (response.data.status === "success") {
+        console.log(response.data); // Correct entry
+        navigate("/dashboard", { replace: true }); // Redirect to dashboard
+      } else {
+        console.error("Login failed:", response.data.message);
+        setError("Login failed. Please check your credentials and try again.");
+      }
     } catch (error) {
       console.error("Error during login:", error);
-      setError("Login failed. Please check your credentials and try again.");
+      setError("An unexpected error occurred. Please try again later.");
     }
   };
 
