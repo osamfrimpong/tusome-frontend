@@ -8,7 +8,7 @@ import AboutUs from "../pages/AboutUs";
 import Contact from "../pages/Contact";
 import ForgotPassword from "../pages/ForgotPassword";
 import UserDashboard from "../pages/UserDashboard";
-import Edit from "../pages/Edit";
+import EditProfile from "../pages/EditProfile";
 import ChangePassword from "../pages/ChangePassword";
 import LandingPagesWrapper from "../components/layouts/LandingPagesWrapper";
 import ProtectedRoute from "./ProtectedRoute";
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       { path: "/dashboard", element: <UserDashboard /> },
-      { path: "/edit", element: <Edit /> },
+      { path: "/edit-profile", element: <EditProfile /> },
       { path: "/change-password", element: <ChangePassword /> },
       { path: "/quiz", element: <Quiz /> },
       { path: "/questions", element: <Questions /> },

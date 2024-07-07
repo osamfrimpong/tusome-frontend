@@ -52,7 +52,6 @@ function UserProfileDropdown() {
             }}
             getContentAnchorEl={null}
           >
-            <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
             <MenuItem onClick={() => navigate("/dashboard")}>
               User Dashboard
             </MenuItem>
@@ -64,7 +63,7 @@ function UserProfileDropdown() {
           variant="outlined"
           disableElevation
           disableRipple
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate("/login")}
           sx={{
             backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
             color: "#fff",
@@ -76,7 +75,7 @@ function UserProfileDropdown() {
             },
           }}
         >
-          Create Account
+          Login/Register
         </Button>
       )}
     </>

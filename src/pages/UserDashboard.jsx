@@ -105,7 +105,16 @@ const UserDashboard = () => {
           keepMounted: true, // Better open performance on mobile.
         }}
       >
-        <List sx={{ width: 240 }} onClick={toggleDrawer}>
+        <List
+          sx={{
+            width: 240,
+          }}
+          onClick={toggleDrawer}
+        >
+          <Button component={Link} to="/">
+            <ListItemText primary="Home" />
+          </Button>
+          <br />
           <Button component={Link} to="/questions">
             <ListItemText primary="Questions" />
           </Button>
@@ -114,7 +123,7 @@ const UserDashboard = () => {
             <ListItemText primary="Quizzes" />
           </Button>
           <br />
-          <Button component={Link} to="/edit">
+          <Button component={Link} to="/edit-profile">
             <ListItemText primary="Edit Profile" />
           </Button>
           <br />

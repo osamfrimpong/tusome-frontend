@@ -12,14 +12,11 @@ import {
   Toolbar,
   Typography,
   Button,
-  useTheme,
-  Grid,
 } from "@mui/material";
-import { Outlet, Link, NavLink, useNavigate } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Footer from "../partials/Footer";
 import Constants from "../../utils/constants";
-import { useAuth } from "../../pages/auth/useAuth";
 import UserProfileDropdown from "../partials/UserProfileDropdown";
 
 const drawerWidth = 240;
@@ -29,14 +26,8 @@ const navItems = [
   { label: "About Us", link: "/about-us" },
 ];
 
-function LandingPagesWrapper(props) {
+function LandingPagesWrapper(_props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const theme = useTheme();
-  const navigate = useNavigate();
-  const { user } = useAuth();
-
-  // Log the user object to check if it's correctly fetched
-  console.log("User:", user);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -73,24 +64,6 @@ function LandingPagesWrapper(props) {
             </ListItemButton>
           </ListItem>
         ))}
-        {!user && (
-          <ListItem
-            disablePadding
-            sx={{ border: "1px solid #fff", justifyContent: "center" }}
-          >
-            <ListItemButton
-              sx={{
-                textAlign: "center",
-                backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-                color: "#fff",
-              }}
-            >
-              <Link to="/signup">
-                <ListItemText primary="Create Account" sx={{ color: "#fff" }} />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-        )}
       </List>
     </Box>
   );
@@ -105,13 +78,13 @@ function LandingPagesWrapper(props) {
           color: "#fff",
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" }, color: "#fff" }}
+            sx={{ display: { sm: "none" }, color: "#fff" }}
           >
             <MenuIcon sx={{ color: "#fff" }} />
           </IconButton>
@@ -128,7 +101,7 @@ function LandingPagesWrapper(props) {
               <span style={{ color: "#fff" }}>Tusome</span>
             </Link>
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box sx={{ display: { xs: "none", sm: "block" }, marginRight: 2 }}>
             {navItems.map((item) => (
               <Button
                 key={item.label}
@@ -142,27 +115,8 @@ function LandingPagesWrapper(props) {
                 {item.label}
               </Button>
             ))}
-            {!user && (
-              <Button
-                variant="outlined"
-                disableElevation
-                disableRipple
-                onClick={() => navigate("/signup")}
-                sx={{
-                  backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-                  color: "#fff",
-                  textTransform: "none",
-                  height: "40px",
-                  borderRadius: "0px",
-                  "&:hover": {
-                    backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-                  },
-                }}
-              >
-                Create Account
-              </Button>
-            )}
           </Box>
+          <UserProfileDropdown /> {/* Integration of UserProfileDropdown */}
         </Toolbar>
       </AppBar>
       <nav>
