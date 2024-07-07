@@ -1,12 +1,9 @@
 import React from "react";
-import { Box, Grid, Typography, Button, Container } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Grid, Typography, Card, CardContent, Container } from "@mui/material";
 import IntroImage from "../assets/images/seems.jpg";
 import Constants from "../utils/constants";
 
 const HomePage = () => {
-  const navigate = useNavigate();
-
   return (
     <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Grid container sx={{ backgroundColor: "#006D5B", py: 10 }}>
@@ -78,45 +75,55 @@ const HomePage = () => {
             </Typography>
           </Grid>
         </Grid>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-            padding: "50px",
-            borderRadius: 10,
-          }}
-        >
-          <Typography
-            variant="h2"
-            sx={{
-              fontWeight: 700,
-              fontSize: 36,
-              color: Constants.CUSTOM_COLORS.WHITE,
-            }}
-          >
-            Find out about the quizzes
-          </Typography>
-          <Button
-            variant="contained"
-            onClick={() => navigate("/quiz")}
-            sx={{
-              backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-              color: Constants.CUSTOM_COLORS.WHITE,
-              borderRadius: "0px",
-              height: "40px",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-              },
-            }}
-          >
-            View Quizzes
-          </Button>
-        </Box>
       </Container>
+      <Grid container spacing={4} sx={{ py: 10, px: 4 }}>
+        {/* Section with four cards */}
+        <Grid item xs={12} sx={{ mb: 4 }}>
+          <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 36, mb: 4 }}>
+            Featured Questions
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <Card sx={{ height: "100%" }}>
+            <CardContent>
+              <Typography variant="h5">Question 1</Typography>
+              <Typography variant="body2">
+                Question 1
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <Card sx={{ height: "100%" }}>
+            <CardContent>
+              <Typography variant="h5">Question 2</Typography>
+              <Typography variant="body2">
+                Question 2
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <Card sx={{ height: "100%" }}>
+            <CardContent>
+              <Typography variant="h5">Question 3</Typography>
+              <Typography variant="body2">
+                Question 3
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <Card sx={{ height: "100%" }}>
+            <CardContent>
+              <Typography variant="h5">Question 4</Typography>
+              <Typography variant="body2">
+                Question 4
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
