@@ -15,12 +15,12 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import { useDB } from "./auth/IndexedDB";
+import { useIndexedDB } from "./auth/IndexedDB";
 
 const UserDashboard = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const db = useDB();
+  const [db] = useIndexedDB("tokens", "token");
 
   const [username, setUsername] = useState("John Doe");
   const [profilePicture, setProfilePicture] = useState(

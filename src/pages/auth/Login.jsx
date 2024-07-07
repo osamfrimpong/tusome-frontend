@@ -43,7 +43,7 @@ export default function SignIn() {
 
       if (response.data.status === "success") {
         console.log(response.data);
-        navigate("/dashboard", { replace: true });
+        navigate("/", { replace: true });
       } else {
         console.error("Login failed:", response.data.message);
         setError("Login failed. Please check your credentials and try again.");

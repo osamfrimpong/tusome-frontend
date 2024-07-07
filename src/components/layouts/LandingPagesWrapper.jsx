@@ -1,5 +1,3 @@
-// LandingPagesWrapper.jsx
-
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -20,6 +18,7 @@ import Constants from "../../utils/constants";
 import { useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import { useAuth } from "../../pages/auth/useAuth";
 
 const drawerWidth = 240;
 const navItems = [
@@ -32,43 +31,75 @@ function LandingPagesWrapper(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
+  const { user } = useAuth(); // Get the user object from the useAuth hook
 
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState) =>!prevState);
+    setMobileOpen((prevState) => !prevState);
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center", backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL, color: "#fff" }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: "center",
+        backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
+        color: "#fff",
+      }}
+    >
       <Link to="/">
-      <Typography sx={{ my: 2, fontWeight: 700, color: "#fff" }}> 
-       <span style={{ color: "#fff" }}>Tusome</span> 
-      </Typography>      
-    </Link>
+        <Typography sx={{ my: 2, fontWeight: 700, color: "#fff" }}>
+          <span style={{ color: "#fff" }}>Tusome</span>
+        </Typography>
+      </Link>
       <Divider sx={{ borderColor: "#fff" }} />
       <List>
         {navItems.map((item) => (
           <ListItem key={item.label} disablePadding>
-            <ListItemButton sx={{ textAlign: "center", backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL, color: "#fff" }}>
+            <ListItemButton
+              sx={{
+                textAlign: "center",
+                backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
+                color: "#fff",
+              }}
+            >
               <Link to={item.link}>
                 <ListItemText primary={item.label} sx={{ color: "#fff" }} />
               </Link>
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItem disablePadding sx={{ border: "1px solid #fff", justifyContent: "center" }}>
-          <ListItemButton sx={{ textAlign: "center", backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL, color: "#fff" }}>
-            <Link to="/signup">
-              <ListItemText primary="Create Account" sx={{ color: "#fff" }} />
-            </Link>
-          </ListItemButton>
-        </ListItem>
+        {!user && (
+          <ListItem
+            disablePadding
+            sx={{ border: "1px solid #fff", justifyContent: "center" }}
+          >
+            <ListItemButton
+              sx={{
+                textAlign: "center",
+                backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
+                color: "#fff",
+              }}
+            >
+              <Link to="/signup">
+                <ListItemText primary="Create Account" sx={{ color: "#fff" }} />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+        )}
       </List>
     </Box>
   );
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <AppBar component="nav" elevation={0} sx={{ backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL, color: "#fff" }}>
+      <AppBar
+        component="nav"
+        elevation={0}
+        sx={{
+          backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
+          color: "#fff",
+        }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -89,33 +120,43 @@ function LandingPagesWrapper(props) {
             }}
           >
             <Link to="/">
-            <span style={{ color: "#fff" }}>Tusome</span>
+              <span style={{ color: "#fff" }}>Tusome</span>
             </Link>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item.label} sx={{ color: "#fff", backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL }} component={Link} to={item.link}>
+              <Button
+                key={item.label}
+                sx={{
+                  color: "#fff",
+                  backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
+                }}
+                component={Link}
+                to={item.link}
+              >
                 {item.label}
               </Button>
             ))}
-            <Button
-              variant="outlined"
-              disableElevation
-              disableRipple
-              onClick={() => navigate("/signup")}
-              sx={{
-                backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-                color: "#fff",
-                textTransform: "none",
-                height: "40px",
-                borderRadius: "0px",
-                "&:hover": {
+            {!user && (
+              <Button
+                variant="outlined"
+                disableElevation
+                disableRipple
+                onClick={() => navigate("/signup")}
+                sx={{
                   backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
-                },
-              }}
-            >
-              Create Account
-            </Button>
+                  color: "#fff",
+                  textTransform: "none",
+                  height: "40px",
+                  borderRadius: "0px",
+                  "&:hover": {
+                    backgroundColor: Constants.CUSTOM_COLORS.MAIN_TEAL,
+                  },
+                }}
+              >
+                Create Account
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
@@ -147,4 +188,3 @@ function LandingPagesWrapper(props) {
 }
 
 export default LandingPagesWrapper;
-

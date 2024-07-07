@@ -46,7 +46,7 @@ export default function SignUp() {
         formData
       );
       console.log(response);
-      navigate("/dashboard", { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       console.error("Registration failed", error);
       setError("Registration failed. Please check your details and try again.");

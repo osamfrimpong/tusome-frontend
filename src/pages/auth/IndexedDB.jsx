@@ -1,13 +1,8 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
+import { useState, useEffect } from "react";
 import { openDB } from "idb";
 
-const DBContext = createContext();
-
-export const useDB = () => {
-  return useContext(DBContext);
-};
-
-const IndexedDB = ({ children }) => {
+export const useIndexedDB = (storeName, key) => {
+  const [storedValue, setStoredValue] = useState(null);
   const [db, setDb] = useState(null);
 
   useEffect(() => {
@@ -15,8 +10,8 @@ const IndexedDB = ({ children }) => {
       try {
         const database = await openDB("MyDatabase", 1, {
           upgrade(db) {
-            if (!db.objectStoreNames.contains("tokens")) {
-              db.createObjectStore("tokens");
+            if (!db.objectStoreNames.contains(storeName)) {
+              db.createObjectStore(storeName);
             }
           },
         });
@@ -27,9 +22,25 @@ const IndexedDB = ({ children }) => {
     };
 
     initDB();
-  }, []);
+  }, [storeName]);
 
-  return <DBContext.Provider value={db}>{children}</DBContext.Provider>;
+  useEffect(() => {
+    const fetchValue = async () => {
+      if (db) {
+        const value = await db.get(storeName, key);
+        setStoredValue(value);
+      }
+    };
+
+    fetchValue();
+  }, [db, storeName, key]);
+
+  const setValue = async (value) => {
+    if (db) {
+      await db.put(storeName, value, key);
+      setStoredValue(value);
+    }
+  };
+
+  return [storedValue, setValue];
 };
-
-export default IndexedDB;
