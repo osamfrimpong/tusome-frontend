@@ -15,6 +15,7 @@ export const useIndexedDB = (storeName, key) => {
             }
           },
         });
+        console.log("Database initialized:", database);
         setDb(database);
       } catch (error) {
         console.error("Failed to open DB", error);
@@ -28,6 +29,7 @@ export const useIndexedDB = (storeName, key) => {
     const fetchValue = async () => {
       if (db) {
         const value = await db.get(storeName, key);
+        console.log(`Fetched value from ${storeName} with key ${key}:`, value);
         setStoredValue(value);
       }
     };
@@ -38,6 +40,7 @@ export const useIndexedDB = (storeName, key) => {
   const setValue = async (value) => {
     if (db) {
       await db.put(storeName, value, key);
+      console.log(`Stored value in ${storeName} with key ${key}:`, value);
       setStoredValue(value);
     }
   };

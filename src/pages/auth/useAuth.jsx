@@ -9,16 +9,19 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (storedUser) {
+      console.log("Setting user from storedUser:", storedUser);
       setUser(storedUser);
     }
   }, [storedUser]);
 
   const login = (userData) => {
-    setUser(userData);
-    setStoredUser(userData);
+    console.log("Logging in user:", userData);
+    setUser(userData.user); // Assuming user data is nested under `user` key
+    setStoredUser(userData.user);
   };
 
   const logout = () => {
+    console.log("Logging out user");
     setUser(null);
     setStoredUser(null);
   };

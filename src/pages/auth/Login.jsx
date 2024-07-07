@@ -13,10 +13,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import axios from "axios";
+import { useAuth } from "../../pages/auth/useAuth"; // Import useAuth hook
 
 export default function SignIn() {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { login } = useAuth(); // Use the useAuth hook
   const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
@@ -43,6 +45,7 @@ export default function SignIn() {
 
       if (response.data.status === "success") {
         console.log(response.data);
+        login(response.data); // Call login function with response data
         navigate("/", { replace: true });
       } else {
         console.error("Login failed:", response.data.message);

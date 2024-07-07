@@ -1,24 +1,26 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import Footer from "../partials/Footer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { Outlet, Link, NavLink } from "react-router-dom";
+import {
+  AppBar,
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Typography,
+  Button,
+  useTheme,
+  Grid,
+} from "@mui/material";
+import { Outlet, Link, NavLink, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
+import Footer from "../partials/Footer";
 import Constants from "../../utils/constants";
-import { useTheme } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import Grid from "@mui/material/Grid";
 import { useAuth } from "../../pages/auth/useAuth";
+import UserProfileDropdown from "../partials/UserProfileDropdown";
 
 const drawerWidth = 240;
 const navItems = [
@@ -31,7 +33,10 @@ function LandingPagesWrapper(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
-  const { user } = useAuth(); // Get the user object from the useAuth hook
+  const { user } = useAuth();
+
+  // Log the user object to check if it's correctly fetched
+  console.log("User:", user);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -170,7 +175,7 @@ function LandingPagesWrapper(props) {
           }}
           sx={{
             display: { xs: "block", sm: "none" },
-            "&.MuiDrawer-paper": {
+            "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
             },
