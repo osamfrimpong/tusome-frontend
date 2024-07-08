@@ -4,6 +4,8 @@ import { useTheme } from "@mui/material";
 import EdmundImg from '../assets/images/Edmund.jpg';
 import SchandorfImg from '../assets/images/Schandorf.jpg';
 import GraceImg from '../assets/images/Grace.jpg';
+import RichardImg from '../assets/images/Richard.jpg';
+
 
 
 function AboutUs() {
@@ -16,7 +18,7 @@ function AboutUs() {
     },
     {
       name: 'Richard Senyo Gadasu',
-      image: 'janeSmithImg',
+      image: RichardImg,
       bio: 'Backend Developer',
     },
     {

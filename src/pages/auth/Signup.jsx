@@ -1,23 +1,27 @@
-import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { Link, useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
+import  { useState } from "react";
+import {
+  Avatar,
+  Button,
+  TextField,
+  Box,
+  Typography,
+  Container,
+  CircularProgress,
+  Card,
+} from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { useTheme } from "@mui/material/styles";
+import { Link, useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material";
 import axios from "axios";
-import { useAuth } from "../../pages/auth/useAuth"; // Import useAuth hook
-import Card from "@mui/material/Card";
+import { useAuth } from "../../pages/auth/useAuth";
 import Constants from "../../utils/constants";
 
 export default function SignUp() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { login } = useAuth(); // Use the useAuth hook
+  const { login } = useAuth();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +29,6 @@ export default function SignUp() {
     const fullName = data.get("fullName");
     const email = data.get("email");
     const password = data.get("password");
-    // const allowExtraEmails = data.get("allowExtraEmails") === "on";
 
     if (!fullName || !email || !password) {
       setError("All fields are required");
@@ -39,16 +42,19 @@ export default function SignUp() {
     };
 
     try {
+      setLoading(true);
       const response = await axios.post(
         `${Constants.API_BASE_URL}/register`,
         formData
       );
       console.log(response);
-      login(response.data); // Call login function with response data
+      login(response.data);
       navigate("/", { replace: true });
     } catch (error) {
       console.error("Registration failed", error);
       setError("Registration failed. Please check your details and try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,17 +99,6 @@ export default function SignUp() {
             <TextField
               required
               fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="family-name"
-              error={Boolean(error)}
-              sx={{ mb: 2 }}
-            />
-
-            <TextField
-              required
-              fullWidth
               id="email"
               label="Email Address"
               name="email"
@@ -135,6 +130,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
             >
               Sign Up
             </Button>
@@ -147,6 +143,22 @@ export default function SignUp() {
           >
             Back
           </Button>
+            <Box sx={{ position: "relative" }}>
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: theme.palette.primary.main,
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-12px",
+                  }}
+                />
+              )}
+            </Box>
+
             <Box
               sx={{
                 display: "flex",
@@ -155,7 +167,7 @@ export default function SignUp() {
                 mt: 2,
               }}
             >
-              <Typography>Already have an account? </Typography>
+              <Typography>Already have an account?</Typography>
               <Link
                 to="/login"
                 style={{
