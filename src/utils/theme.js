@@ -26,7 +26,7 @@ export const lightTheme = createTheme({
     mode: "light",
     primary: { main: Constants.LIGHT_COLORS.PRIMARY },
     secondary: { main: Constants.LIGHT_COLORS.SECONDARY },
-    error: { main: Constants.LIGHT_COLORS.ERROR },
+    error: { main: Constants.DARK_COLORS.ERROR },
     success: { main: Constants.LIGHT_COLORS.SUCCESS },
     warning: { main: Constants.LIGHT_COLORS.WARNING },
     neutral: { main: Constants.LIGHT_COLORS.NEUTRAL },

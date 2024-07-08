@@ -80,15 +80,15 @@ const HomePage = () => {
         {/* Section with four cards */}
         <Grid item xs={12} sx={{ mb: 4 }}>
           <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 36, mb: 4 }}>
-            Featured Questions
+           Questions
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: "100%" }}>
             <CardContent>
-              <Typography variant="h5">Question 1</Typography>
+              <Typography variant="h5">Featured Category</Typography>
               <Typography variant="body2">
-                Question 1
+                Featured Category
               </Typography>
             </CardContent>
           </Card>
@@ -96,9 +96,9 @@ const HomePage = () => {
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: "100%" }}>
             <CardContent>
-              <Typography variant="h5">Question 2</Typography>
+              <Typography variant="h5">Recent Search</Typography>
               <Typography variant="body2">
-                Question 2
+                Recent Search
               </Typography>
             </CardContent>
           </Card>
@@ -106,19 +106,9 @@ const HomePage = () => {
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: "100%" }}>
             <CardContent>
-              <Typography variant="h5">Question 3</Typography>
+              <Typography variant="h5">Random Question</Typography>
               <Typography variant="body2">
-                Question 3
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent>
-              <Typography variant="h5">Question 4</Typography>
-              <Typography variant="body2">
-                Question 4
+                Random
               </Typography>
             </CardContent>
           </Card>

@@ -4,7 +4,7 @@ class Constants {
     static LIGHT_COLORS = {
         PRIMARY: "#014D4E",
         SECONDARY: "#F4F4ED",
-        ERROR: "#FFF0F4",
+        ERROR: "#FF8A80",
         SUCCESS: "#ECFBEC",
         WARNING: "#DCB400",
         NEUTRAL: "#F5F6FA",
@@ -30,7 +30,7 @@ class Constants {
         MAIN_TEAL: "#014D4E",
     }
 
-    static API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    static API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://tusome-06769d862471.herokuapp.com/api";
 
     static HIDE_ON_MOBILE = {
         display: { xs: "none", sm: "none", md: "block"},
