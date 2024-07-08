@@ -3,6 +3,7 @@ import { useIndexedDB } from "./IndexedDB";
 
 const AuthContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [storedUser, setStoredUser] = useIndexedDB("auth", "user");

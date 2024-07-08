@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { Link, useNavigate } from "react-router-dom";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
 import axios from "axios";
+import Card from "@mui/material/Card";
 import { useAuth } from "../../pages/auth/useAuth"; // Import useAuth hook
+import Constants from "../../utils/constants";
 
 export default function SignIn() {
   const theme = useTheme();
@@ -39,7 +37,7 @@ export default function SignIn() {
 
     try {
       const response = await axios.post(
-        "https://tusome-06769d862471.herokuapp.com/api/login",
+        `${Constants.API_BASE_URL}/login`,
         formData
       );
 
@@ -58,11 +56,10 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container component="main" maxWidth="sm" sx={{alignContent: "center", height: "100vh"}}>
+      <Card sx={{padding: 4, backgroundColor: theme.palette.secondary.main}}>
       <Box
         sx={{
-          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -102,10 +99,6 @@ export default function SignIn() {
               {error}
             </Typography>
           )}
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -114,21 +107,15 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to="/forgot" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              Don't have an account?{" "}
-              <Link to="/signup" variant="body2">
+          <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row", mt: 2 }}>
+          <Typography>Don&apos;t have an account?{" "}</Typography>
+              <Link to="/signup" style={{textDecoration: "none", fontWeight: 700, color: theme.palette.primary.main }}>
                 Sign Up
               </Link>
-            </Grid>
-          </Grid>
+          </Box>
         </Box>
       </Box>
+      </Card>
     </Container>
   );
 }
