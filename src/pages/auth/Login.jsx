@@ -12,23 +12,27 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-import { useAuth } from "../../pages/auth/useAuth"; // Import useAuth hook
+import { useAuth } from "../../pages/auth/useAuth";
 
 export default function SignIn() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { login } = useAuth(); // Use the useAuth hook
+  const { login } = useAuth();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
 
     if (!email || !password) {
       setError("Both email and password are required");
+      setLoading(false);
       return;
     }
 
@@ -45,7 +49,7 @@ export default function SignIn() {
 
       if (response.data.status === "success") {
         console.log(response.data);
-        login(response.data); // Call login function with response data
+        login(response.data);
         navigate("/", { replace: true });
       } else {
         console.error("Login failed:", response.data.message);
@@ -54,6 +58,8 @@ export default function SignIn() {
     } catch (error) {
       console.error("Error during login:", error);
       setError("An unexpected error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -111,8 +117,9 @@ export default function SignIn() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
-            Sign In
+            {loading ? <CircularProgress size={24} /> : "Sign In"}
           </Button>
           <Grid container>
             <Grid item xs>

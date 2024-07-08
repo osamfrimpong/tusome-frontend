@@ -12,6 +12,7 @@ import EditProfile from "../pages/EditProfile";
 import ChangePassword from "../pages/ChangePassword";
 import LandingPagesWrapper from "../components/layouts/LandingPagesWrapper";
 import ProtectedRoute from "./ProtectedRoute";
+import Progress from "../pages/Progress";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "/change-password", element: <ChangePassword /> },
       { path: "/quiz", element: <Quiz /> },
       { path: "/questions", element: <Questions /> },
+      { path: "/progress", element: <Progress /> },
     ],
   },
   { path: "*", element: <div>404</div> },
