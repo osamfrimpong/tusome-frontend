@@ -138,6 +138,15 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            <Button
+            type="button"
+            fullWidth
+            variant="outlined"
+            sx={{ mb: 2 }}
+            onClick={() => navigate("/")}
+          >
+            Back
+          </Button>
             <Box
               sx={{
                 display: "flex",

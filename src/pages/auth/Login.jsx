@@ -107,6 +107,15 @@ export default function SignIn() {
           >
             Sign In
           </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="outlined"
+            sx={{ mb: 2 }}
+            onClick={() => navigate("/")}
+          >
+            Back
+          </Button>
           <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "row", mt: 2 }}>
           <Typography>Don&apos;t have an account?{" "}</Typography>
               <Link to="/signup" style={{textDecoration: "none", fontWeight: 700, color: theme.palette.primary.main }}>
