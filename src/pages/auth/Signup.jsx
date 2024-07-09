@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
   Avatar,
   Button,
@@ -125,16 +125,25 @@ export default function SignUp() {
               </Typography>
             )}
 
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
+            >
+              Sign Up
+            </Button>
+            <Button
+            type="button"
+            fullWidth
+            variant="outlined"
+            sx={{ mb: 2 }}
+            onClick={() => navigate("/")}
+          >
+            Back
+          </Button>
             <Box sx={{ position: "relative" }}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                disabled={loading}
-              >
-                Sign Up
-              </Button>
               {loading && (
                 <CircularProgress
                   size={24}

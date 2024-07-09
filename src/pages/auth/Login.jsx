@@ -123,8 +123,18 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
               disabled={loading}
             >
+              
               {loading ? <CircularProgress size={24} /> : "Sign In"}
             </Button>
+            <Button
+            type="button"
+            fullWidth
+            variant="outlined"
+            sx={{ mb: 2 }}
+            onClick={() => navigate("/")}
+          >
+            Back
+          </Button>
             <Box
               sx={{
                 display: "flex",

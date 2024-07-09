@@ -26,7 +26,7 @@ const navItems = [
   { label: "About Us", link: "/about-us" },
 ];
 
-function LandingPagesWrapper(_props) {
+function LandingPagesWrapper() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -97,8 +97,8 @@ function LandingPagesWrapper(_props) {
               color: "#fff",
             }}
           >
-            <Link to="/">
-              <span style={{ color: "#fff" }}>Tusome</span>
+            <Link to="/" style={{textDecoration: "none", color: "white"}}>
+             Tusome
             </Link>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" }, marginRight: 2 }}>
@@ -138,7 +138,7 @@ function LandingPagesWrapper(_props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1}}>
         <Outlet />
       </Box>
       <Footer />

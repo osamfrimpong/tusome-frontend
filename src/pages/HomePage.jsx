@@ -1,15 +1,93 @@
-import React from "react";
-import { Box, Grid, Typography, Card, CardContent, Container } from "@mui/material";
-import IntroImage from "../assets/images/seems.jpg";
+import {
+  Box,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
+
 import Constants from "../utils/constants";
+import CategoryCard from "../components/cards/CategoryCard";
+import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
+import AutoModeIcon from "@mui/icons-material/AutoMode";
+import AssignmentTurnedIn from "@mui/icons-material/AssignmentTurnedIn";
+import PropositionCard from "../components/cards/PropositionCard";
+import ChooseUsImage from "../assets/images/choose.jpg";
+import QuizImage from "../assets/images/quiz.jpg";
+import { useTheme } from "@mui/material/styles";
 
 const HomePage = () => {
+  const theme = useTheme();
+  const categories = [
+    {
+      id: 1,
+      title: "Mathematics",
+      description:
+        "Mathematics questions for high school and university students",
+    },
+    {
+      id: 2,
+      title: "Physics",
+      description: "Physics questions for high school and university students",
+    },
+    {
+      id: 3,
+      title: "Chemistry",
+      description:
+        "Chemistry questions for high school and university students",
+    },
+    {
+      id: 4,
+      title: "Biology",
+      description: "Biology questions for high school and university students",
+    },
+    {
+      id: 5,
+      title: "Computer Science",
+      description:
+        "Computer Science questions for high school and university students",
+    },
+    {
+      id: 6,
+      title: "English",
+      description: "English questions for high school and university students",
+    },
+  ];
+
+  const propositions = [
+    {
+      id: 1,
+      title: "What to Expect",
+      description:
+        "We have a wide range of past questions from high schools and universities in Ghana and Kenya",
+      icon: <QuestionAnswer />,
+    },
+    {
+      id: 2,
+      title: "Progress Tracking",
+      description:
+        "Monitor your study progress and be able to continue from where you got to when you return.",
+      icon: <AutoModeIcon />,
+    },
+    {
+      id: 3,
+      title: "Practice Mode",
+      description:
+        "Test your knowledge with practice exams that simulate real test.",
+      icon: <AssignmentTurnedIn />,
+    },
+  ];
   return (
-    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      <Grid container sx={{ backgroundColor: "#006D5B", py: 10 }}>
-        <Grid item xs={12} sm={8} md={8} sx={{ p: 5, pl: 10 }}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        mt: { xs: 7, sm: 7, md: 8 },
+      }}
+    >
+      <Grid container sx={{ backgroundColor: "#006D5B" }}>
+        <Grid item xs={12} sm={8} md={8} sx={{ alignContent: "center", px: 4 }}>
           <Typography
-            variant="h1"
             sx={{
               fontWeight: 700,
               fontSize: 48,
@@ -34,85 +112,49 @@ const HomePage = () => {
             better learning and exam preparation.
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={4} md={4} sx={{ p: 5, pr: 10 }}>
+        <Grid item xs={12} sm={4} md={4}>
           <Box
             component="img"
-            src={IntroImage}
+            src={QuizImage}
             alt="seems"
-            sx={{ borderRadius: 10, width: 500, height: 250 }}
+            sx={{ objectFit: "cover", width: "100%", height: "100%" }}
           />
         </Grid>
       </Grid>
-      <Container maxWidth="lg" sx={{ py: 10 }}>
-        <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 36, mb: 4 }}>
-          What to Expect
-        </Typography>
-        <Grid container spacing={8} sx={{ mb: 4 }}>
-          <Grid item xs={12} sm={4} md={4}>
-            <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
-              Wide Range
-            </Typography>
-            <Typography>
-              We have a wide range of past questions from high schools and
-              universities in Ghana and Kenya
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={4} md={4}>
-            <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
-              Progress Tracking
-            </Typography>
-            <Typography>
-              Monitor your study progress and be able to continue from where you
-              got to when you return.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={4} md={4}>
-            <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
-              Practice Mode
-            </Typography>
-            <Typography>
-              Test your knowledge with practice exams that simulate real test.
-            </Typography>
-          </Grid>
+
+      <Grid container spacing={0} sx={{ px: 4, mt: 4 }}>
+        <Grid item xs={12} sm={4} md={4}>
+          <Box
+            component="img"
+            src={ChooseUsImage}
+            sx={{ borderTopLeftRadius: 10, borderBottomLeftRadius: 10, objectFit: "cover", width: "100%", height: "100%" }}
+          />
         </Grid>
-      </Container>
-      <Grid container spacing={4} sx={{ py: 10, px: 4 }}>
-        {/* Section with four cards */}
-        <Grid item xs={12} sx={{ mb: 4 }}>
-          <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 36, mb: 4 }}>
-           Questions
+        <Grid item xs={12} sm={8} md={8} sx={{backgroundColor: theme.palette.secondary.main, px: 4, alignContent: "center"}}>
+          <Typography sx={{ fontWeight: 700, fontSize: 36, mb: 1 }}>
+            Why Choose Tusome?
           </Typography>
+          <Divider sx={{ mb: 2 }} />
+          <Grid container spacing={4}>
+            {propositions.map((proposition) => (
+              <Grid item xs={12} sm={12} md={6} key={proposition.id}>
+                <PropositionCard proposition={proposition} />
+              </Grid>))}
+          </Grid>
+
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent>
-              <Typography variant="h5">Featured Category</Typography>
-              <Typography variant="body2">
-                Featured Category
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent>
-              <Typography variant="h5">Recent Search</Typography>
-              <Typography variant="body2">
-                Recent Search
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent>
-              <Typography variant="h5">Random Question</Typography>
-              <Typography variant="body2">
-                Random
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+      </Grid>
+
+      <Typography sx={{ fontWeight: 700, fontSize: 36, mb: 1, mt: 4,  pl: 4 }}>
+        Popular Categories
+      </Typography>
+      <Divider sx={{ mb: 2 }} />
+      <Grid container spacing={4} sx={{px: 4, mb: 2}}>
+        {categories.map((category) => (
+          <Grid item xs={12} sm={6} md={3} key={category.id}>
+            <CategoryCard category={category} />
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );
