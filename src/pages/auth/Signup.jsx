@@ -1,158 +1,187 @@
-import React, { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { Link, useNavigate } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import  { useState } from "react";
+import {
+  Avatar,
+  Button,
+  TextField,
+  Box,
+  Typography,
+  Container,
+  CircularProgress,
+  Card,
+} from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import axios from "axios";
-import { useAuth } from "../../pages/auth/useAuth"; // Import useAuth hook
+import { useAuth } from "../../pages/auth/useAuth";
+import Constants from "../../utils/constants";
 
 export default function SignUp() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { login } = useAuth(); // Use the useAuth hook
+  const { login } = useAuth();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const firstName = data.get("firstName");
-    const lastName = data.get("lastName");
+    const fullName = data.get("fullName");
     const email = data.get("email");
     const password = data.get("password");
-    const allowExtraEmails = data.get("allowExtraEmails") === "on";
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!fullName || !email || !password) {
       setError("All fields are required");
       return;
     }
 
     const formData = {
-      name: `${firstName} ${lastName}`,
+      name: fullName,
       email,
       password,
-      allowExtraEmails,
     };
 
     try {
+      setLoading(true);
       const response = await axios.post(
-        "https://tusome-06769d862471.herokuapp.com/api/register",
+        `${Constants.API_BASE_URL}/register`,
         formData
       );
       console.log(response);
-      login(response.data); // Call login function with response data
+      login(response.data);
       navigate("/", { replace: true });
     } catch (error) {
       console.error("Registration failed", error);
       setError("Registration failed. Please check your details and try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
-          <AccountBoxIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                name="firstName"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-                error={Boolean(error)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="family-name"
-                error={Boolean(error)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                error={Boolean(error)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-                error={Boolean(error)}
-              />
-            </Grid>
-            {error && (
-              <Grid item xs={12}>
-                <Typography color="error" variant="body2">
-                  {error}
-                </Typography>
-              </Grid>
-            )}
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Receive updates from us. Unsubscribe anytime."
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+    <Container
+      component="main"
+      maxWidth="sm"
+      sx={{ alignContent: "center", height: "100vh" }}
+    >
+      <Card sx={{ padding: 4, backgroundColor: theme.palette.secondary.main }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
+            <AccountBoxIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
           >
-            Sign Up
+            <TextField
+              autoComplete="given-name"
+              name="fullName"
+              required
+              fullWidth
+              id="fullName"
+              label="Full Name"
+              autoFocus
+              error={Boolean(error)}
+              sx={{ mb: 2 }}
+            />
+
+            <TextField
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              error={Boolean(error)}
+              sx={{ mb: 2 }}
+            />
+
+            <TextField
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              error={Boolean(error)}
+              sx={{ mb: 2 }}
+            />
+
+            {error && (
+              <Typography color="error" variant="body2">
+                {error}
+              </Typography>
+            )}
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
+            >
+              Sign Up
+            </Button>
+            <Button
+            type="button"
+            fullWidth
+            variant="outlined"
+            sx={{ mb: 2 }}
+            onClick={() => navigate("/")}
+          >
+            Back
           </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              Already have an account?{" "}
-              <Link to="/login" variant="body2">
-                Sign in
+            <Box sx={{ position: "relative" }}>
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: theme.palette.primary.main,
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-12px",
+                  }}
+                />
+              )}
+            </Box>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "row",
+                mt: 2,
+              }}
+            >
+              <Typography>Already have an account?</Typography>
+              <Link
+                to="/login"
+                style={{
+                  textDecoration: "none",
+                  fontWeight: 700,
+                  color: theme.palette.primary.main,
+                }}
+              >
+                Sign In
               </Link>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Box>
-      </Box>
+      </Card>
     </Container>
   );
 }

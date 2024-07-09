@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import { useIndexedDB } from "./auth/IndexedDB";
+import Progress from "./Progress"; // Import the Progress component
 
 const UserDashboard = () => {
   const theme = useTheme();
@@ -42,11 +43,6 @@ const UserDashboard = () => {
     { title: "Favorite Question 1", date: "2024-06-29" },
     { title: "Favorite Question 2", date: "2024-06-29" },
     { title: "Favorite Question 3", date: "2024-06-29" },
-  ]);
-  const [progressTracking, setProgressTracking] = useState([
-    { title: "Quiz 1", progress: 50 },
-    { title: "Quiz 2", progress: 75 },
-    { title: "Quiz 3", progress: 100 },
   ]);
   const [notifications, setNotifications] = useState([
     { title: "New Quiz Available", date: "2024-06-29" },
@@ -207,10 +203,7 @@ const UserDashboard = () => {
                 </Paper>
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <Paper
-                  elevation={3}
-                  sx={{ p: 2, borderRadius: "12px", bgcolor: "theme" }}
-                >
+                <Paper elevation={3} sx={{ p: 2, borderRadius: "12px" }}>
                   <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>
                     My Questions
                   </Typography>
@@ -226,10 +219,7 @@ const UserDashboard = () => {
                 </Paper>
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <Paper
-                  elevation={3}
-                  sx={{ p: 2, borderRadius: "12px", bgcolor: "theme" }}
-                >
+                <Paper elevation={3} sx={{ p: 2, borderRadius: "12px" }}>
                   <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>
                     Favorites
                   </Typography>
@@ -244,24 +234,9 @@ const UserDashboard = () => {
                   </ul>
                 </Paper>
               </Grid>
+              {/* Replace progress tracking with Progress component */}
               <Grid item xs={12} sm={6} md={4}>
-                <Paper
-                  elevation={3}
-                  sx={{ p: 2, borderRadius: "12px", bgcolor: "theme" }}
-                >
-                  <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>
-                    Progress Tracking
-                  </Typography>
-                  <ul>
-                    {progressTracking.map((progress, index) => (
-                      <li key={index}>
-                        <Typography variant="body1" gutterBottom>
-                          {progress.title} - {progress.progress}%
-                        </Typography>
-                      </li>
-                    ))}
-                  </ul>
-                </Paper>
+                <Progress />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <Paper
