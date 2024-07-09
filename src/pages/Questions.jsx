@@ -27,7 +27,7 @@ const QuestionPage = () => {
 
   useEffect(() => {
     axios
-      .get("/api/categories")
+      .get(`${Constants.API_BASE_URL}/api/categories`)
       .then((response) => {
         const fetchedCategories = response.data;
         if (Array.isArray(fetchedCategories)) {

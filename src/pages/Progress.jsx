@@ -25,7 +25,7 @@ const Progress = () => {
 
   useEffect(() => {
     axios
-      .get("https://tusome-06769d862471.herokuapp.com/api/dashboard/progress")
+      .get(`${Constants.API_BASE_URL}/dashboard/progress`)
       .then((response) => {
         setProgressData(response.data);
         setLoading(false);
