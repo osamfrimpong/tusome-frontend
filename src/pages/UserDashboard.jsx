@@ -69,7 +69,8 @@ const UserDashboard = () => {
     const checkToken = async () => {
       if (db) {
         const tx = db.transaction("tokens", "readonly");
-        const token = await tx.store.get("token");
+        const tokenStore = tx.objectStore("tokens");
+        const token = await tokenStore.get("token");
         if (!token) {
           navigate("/login", { replace: true });
         }

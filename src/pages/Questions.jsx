@@ -27,7 +27,7 @@ const QuestionPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${Constants.API_BASE_URL}/api/categories`)
+      .get(`${Constants.API_BASE_URL}/categories`)
       .then((response) => {
         const fetchedCategories = response.data.data; // Adjust to access 'data' property
         if (Array.isArray(fetchedCategories)) {
@@ -46,7 +46,7 @@ const QuestionPage = () => {
     if (selectedCategory) {
       axios
         .get(
-          `${Constants.API_BASE_URL}/api/categories/${selectedCategory.id}/questions`
+          `${Constants.API_BASE_URL}/categories/${selectedCategory.id}/questions`
         )
         .then((response) => {
           setSelectedCategory((prevCategory) => ({
