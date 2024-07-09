@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import Constants from "../utils/constants";
+import { useIndexedDB } from "./auth/IndexedDB";
 
 const useStyles = {
   root: css`
@@ -23,19 +24,35 @@ const Progress = () => {
   const classes = useStyles;
   const [progressData, setProgressData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [token] = useIndexedDB("tokens", "token");
 
   useEffect(() => {
-    axios
-      .get(`${Constants.API_BASE_URL}/dashboard/progress`)
-      .then((response) => {
+    const fetchProgressData = async () => {
+      if (!token) {
+        console.error("No token found");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          `${Constants.API_BASE_URL}/dashboard/progress`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setProgressData(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("There was an error fetching the progress data!", error);
+      } finally {
         setLoading(false);
-      });
-  }, []);
+      }
+    };
+
+    fetchProgressData();
+  }, [token]);
 
   if (loading) {
     return <CircularProgress />;

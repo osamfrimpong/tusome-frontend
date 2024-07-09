@@ -28,9 +28,16 @@ export const useIndexedDB = (storeName, key) => {
   useEffect(() => {
     const fetchValue = async () => {
       if (db) {
-        const value = await db.get(storeName, key);
-        console.log(`Fetched value from ${storeName} with key ${key}:`, value);
-        setStoredValue(value);
+        try {
+          const value = await db.get(storeName, key);
+          console.log(
+            `Fetched value from ${storeName} with key ${key}:`,
+            value
+          );
+          setStoredValue(value);
+        } catch (error) {
+          console.error("Failed to fetch value from DB", error);
+        }
       }
     };
 
@@ -39,9 +46,13 @@ export const useIndexedDB = (storeName, key) => {
 
   const setValue = async (value) => {
     if (db) {
-      await db.put(storeName, value, key);
-      console.log(`Stored value in ${storeName} with key ${key}:`, value);
-      setStoredValue(value);
+      try {
+        await db.put(storeName, value, key);
+        console.log(`Stored value in ${storeName} with key ${key}:`, value);
+        setStoredValue(value);
+      } catch (error) {
+        console.error("Failed to store value in DB", error);
+      }
     }
   };
 
