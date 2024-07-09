@@ -14,44 +14,32 @@ import PropositionCard from "../components/cards/PropositionCard";
 import ChooseUsImage from "../assets/images/choose.jpg";
 import QuizImage from "../assets/images/quiz.jpg";
 import { useTheme } from "@mui/material/styles";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const HomePage = () => {
   const theme = useTheme();
-  const categories = [
-    {
-      id: 1,
-      title: "Mathematics",
-      description:
-        "Mathematics questions for high school and university students",
-    },
-    {
-      id: 2,
-      title: "Physics",
-      description: "Physics questions for high school and university students",
-    },
-    {
-      id: 3,
-      title: "Chemistry",
-      description:
-        "Chemistry questions for high school and university students",
-    },
-    {
-      id: 4,
-      title: "Biology",
-      description: "Biology questions for high school and university students",
-    },
-    {
-      id: 5,
-      title: "Computer Science",
-      description:
-        "Computer Science questions for high school and university students",
-    },
-    {
-      id: 6,
-      title: "English",
-      description: "English questions for high school and university students",
-    },
-  ];
+  const [categories, setCategories] = useState([]); 
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${Constants.API_BASE_URL}/home`, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          }
+        });
+        // console.log(response.data.categories);
+        setCategories(response.data.categories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
 
   const propositions = [
     {
@@ -146,7 +134,7 @@ const HomePage = () => {
       </Grid>
 
       <Typography sx={{ fontWeight: 700, fontSize: 36, mb: 1, mt: 4,  pl: 4 }}>
-        Popular Categories
+        Popular Categories/Subjects
       </Typography>
       <Divider sx={{ mb: 2 }} />
       <Grid container spacing={4} sx={{px: 4, mb: 2}}>

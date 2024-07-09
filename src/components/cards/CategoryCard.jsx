@@ -23,7 +23,7 @@ export default function CategoryCard(props) {
     >
       <Box sx={{ padding: "10px" }}>
         <Typography sx={{ fontWeight: 700, mb: 2 }}>
-          {props.category.title}
+          {props.category.name}
         </Typography>
         <Typography sx={{ fontWeight: 400, mb: 2 }}>
           {props.category.description}

@@ -13,6 +13,8 @@ import ChangePassword from "../pages/ChangePassword";
 import LandingPagesWrapper from "../components/layouts/LandingPagesWrapper";
 import ProtectedRoute from "./ProtectedRoute";
 import Progress from "../pages/Progress";
+import ViewCategory from "../pages/landing/ViewCategory";
+import ViewQuestion from "../pages/landing/ViewQuestion";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,8 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/about-us", element: <AboutUs /> },
       { path: "/quiz", element: <Quiz /> },
-      { path: "/contact", element: <Contact /> },
+      { path: "/category/view/:categoryId", element: <ViewCategory /> },
+      {path: "/question/view/:questionId", element: <ViewQuestion />},
     ],
   },
   { path: "/signup", element: <Signup /> },
@@ -33,7 +36,7 @@ const router = createBrowserRouter([
       { path: "/dashboard", element: <UserDashboard /> },
       { path: "/edit-profile", element: <EditProfile /> },
       { path: "/change-password", element: <ChangePassword /> },
-      { path: "/quiz", element: <Quiz /> },
+      { path: "/quiz/:questionId", element: <Quiz /> },
       { path: "/questions", element: <Questions /> },
       { path: "/progress", element: <Progress /> },
     ],
