@@ -12,7 +12,6 @@ import {
   Divider,
   IconButton,
   ListItemButton,
-  Button,
 } from "@mui/material";
 import {
   ChevronRight as ChevronRightIcon,
@@ -33,7 +32,7 @@ const QuestionPage = () => {
         const fetchedCategories = response.data;
         if (Array.isArray(fetchedCategories)) {
           setCategories(fetchedCategories);
-          setSelectedCategory(fetchedCategories[0]);
+          setSelectedCategory(fetchedCategories[0]); // Select the first category initially
         } else {
           console.error("Invalid response format:", fetchedCategories);
         }
@@ -42,6 +41,27 @@ const QuestionPage = () => {
         console.error("Error fetching categories:", error);
       });
   }, []);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      axios
+        .get(
+          `${Constants.API_BASE_URL}/api/categories/${selectedCategory.id}/questions`
+        )
+        .then((response) => {
+          setSelectedCategory((prevCategory) => ({
+            ...prevCategory,
+            questions: response.data.questions,
+          }));
+        })
+        .catch((error) => {
+          console.error(
+            `Error fetching questions for category ${selectedCategory.id}:`,
+            error
+          );
+        });
+    }
+  }, [selectedCategory]);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
