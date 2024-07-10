@@ -11,14 +11,13 @@ import {
   ListItemText,
   Divider,
   IconButton,
-  ListItemButton,
 } from "@mui/material";
 import {
-  ChevronRight as ChevronRightIcon,
   ArrowBack as ArrowBackIcon,
   Home as HomeIcon,
 } from "@mui/icons-material";
 import Constants from "../utils/constants";
+import CategoryList from "./CategoryList"; // Import the CategoryList component
 
 const QuestionPage = () => {
   const [categories, setCategories] = useState([]);
@@ -96,33 +95,11 @@ const QuestionPage = () => {
             <Typography variant="h5" gutterBottom>
               Categories
             </Typography>
-            <List component="nav" aria-label="categories">
-              {categories.length > 0 ? (
-                categories.map((category) => (
-                  <React.Fragment key={category.id}>
-                    <ListItem disablePadding>
-                      <ListItemButton
-                        selected={
-                          selectedCategory &&
-                          category.id === selectedCategory.id
-                        }
-                        onClick={() => handleCategoryClick(category)}
-                      >
-                        <ListItemText primary={category.name} />
-                        <IconButton edge="end">
-                          <ChevronRightIcon />
-                        </IconButton>
-                      </ListItemButton>
-                    </ListItem>
-                    <Divider />
-                  </React.Fragment>
-                ))
-              ) : (
-                <Typography variant="body1">
-                  No categories available.
-                </Typography>
-              )}
-            </List>
+            <CategoryList
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onSelectCategory={handleCategoryClick}
+            />
           </Paper>
         </Grid>
 
@@ -145,9 +122,7 @@ const QuestionPage = () => {
                   </React.Fragment>
                 ))
               ) : (
-                <Typography variant="body1">
-                  No questions available for this category.
-                </Typography>
+                <ListItemText primary="No questions available for this category." />
               )}
             </List>
           </Paper>
