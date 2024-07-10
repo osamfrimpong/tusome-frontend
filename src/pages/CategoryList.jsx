@@ -17,87 +17,45 @@ import {
 import Constants from "../utils/constants";
 
 const CategoryList = ({ selectedCategory, onSelectCategory }) => {
-  const [categories, setCategories] = useState([]);
-  const [openCategories, setOpenCategories] = useState({});
+  const [subcategories, setSubcategories] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${Constants.API_BASE_URL}/categories`)
-      .then((response) => {
-        console.log("Fetched categories:", response.data);
-        const fetchedCategories = response.data.data;
-        if (Array.isArray(fetchedCategories)) {
-          setCategories(fetchedCategories);
-        } else {
-          console.error("Invalid response format:", fetchedCategories);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching categories:", error);
-      });
-  }, []);
+    if (selectedCategory && selectedCategory.children) {
+      setSubcategories(selectedCategory.children);
+    } else {
+      setSubcategories([]);
+    }
+  }, [selectedCategory]);
 
   const handleToggle = (categoryId) => {
-    setOpenCategories((prevOpenCategories) => ({
-      ...prevOpenCategories,
-      [categoryId]: !prevOpenCategories[categoryId],
-    }));
+    // Toggle logic if needed
   };
 
-  const renderCategory = (category, level = 0) => {
-    const isOpen = openCategories[category.id];
-    const hasChildren = category.children && category.children.length > 0;
-
+  const renderSubcategory = (subcategory, level = 0) => {
     return (
-      <React.Fragment key={category.id}>
+      <React.Fragment key={subcategory.id}>
         <ListItem disablePadding>
           <ListItemButton
-            selected={selectedCategory && category.id === selectedCategory.id}
-            onClick={() => {
-              console.log("Category clicked:", category);
-              onSelectCategory(category);
-            }}
+            selected={
+              selectedCategory && subcategory.id === selectedCategory.id
+            }
+            onClick={() => onSelectCategory(subcategory)}
             sx={{ pl: level * 2 }}
           >
-            <ListItemText primary={category.name} />
-            {hasChildren && (
-              <IconButton
-                edge="end"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleToggle(category.id);
-                }}
-              >
-                {isOpen ? <ExpandLess /> : <ExpandMore />}
-              </IconButton>
-            )}
-            {!hasChildren && (
-              <IconButton edge="end">
-                <ChevronRightIcon />
-              </IconButton>
-            )}
+            <ListItemText primary={subcategory.name} />
           </ListItemButton>
         </ListItem>
         <Divider />
-        {hasChildren && (
-          <Collapse in={isOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {category.children.map((child) =>
-                renderCategory(child, level + 1)
-              )}
-            </List>
-          </Collapse>
-        )}
       </React.Fragment>
     );
   };
 
   return (
-    <List component="nav" aria-label="categories">
-      {categories.length > 0 ? (
-        categories.map((category) => renderCategory(category))
+    <List component="nav" aria-label="subcategories">
+      {subcategories.length > 0 ? (
+        subcategories.map((subcategory) => renderSubcategory(subcategory))
       ) : (
-        <ListItemText primary="No categories available." />
+        <ListItemText primary="No subcategories available." />
       )}
     </List>
   );
