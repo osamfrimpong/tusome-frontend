@@ -17,7 +17,7 @@ import {
   Home as HomeIcon,
 } from "@mui/icons-material";
 import Constants from "../utils/constants";
-import CategoryList from "./CategoryList";
+import CategorySelect from "./CategorySelect";
 
 const QuestionPage = () => {
   const [categories, setCategories] = useState([]);
@@ -31,7 +31,6 @@ const QuestionPage = () => {
         const fetchedCategories = response.data.data;
         if (Array.isArray(fetchedCategories)) {
           setCategories(fetchedCategories);
-          setSelectedCategory(fetchedCategories[0]);
         } else {
           console.error("Invalid response format:", fetchedCategories);
         }
@@ -94,7 +93,7 @@ const QuestionPage = () => {
             <Typography variant="h5" gutterBottom>
               Categories
             </Typography>
-            <CategoryList
+            <CategorySelect
               categories={categories}
               selectedCategory={selectedCategory}
               onSelectCategory={handleCategoryClick}

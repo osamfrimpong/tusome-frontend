@@ -1,79 +1,45 @@
 import React from "react";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListItemButton,
-  Divider,
-  IconButton,
-  Collapse,
-} from "@mui/material";
-import {
-  ExpandLess,
-  ExpandMore,
-  ChevronRight as ChevronRightIcon,
-} from "@mui/icons-material";
 
-const CategoryList = ({ categories, selectedCategory, onSelectCategory }) => {
-  const [openCategories, setOpenCategories] = React.useState({});
-
-  const handleToggle = (categoryId) => {
-    setOpenCategories((prevOpenCategories) => ({
-      ...prevOpenCategories,
-      [categoryId]: !prevOpenCategories[categoryId],
-    }));
+const CategorySelect = ({ categories, selectedCategory, onSelectCategory }) => {
+  const renderOptions = (categories, level = 0) => {
+    return categories.map((category) => (
+      <React.Fragment key={category.id}>
+        <option value={category.id}>
+          {"-".repeat(level)} {category.name}
+        </option>
+        {category.children &&
+          category.children.length > 0 &&
+          renderOptions(category.children, level + 1)}
+      </React.Fragment>
+    ));
   };
 
-  const renderCategories = (categories) => {
-    return categories.map((category) => {
-      const isOpen = openCategories[category.id];
-      const hasChildren = category.children && category.children.length > 0;
+  const handleChange = (event) => {
+    const categoryId = parseInt(event.target.value);
+    const selected = findCategoryById(categories, categoryId);
+    onSelectCategory(selected);
+  };
 
-      return (
-        <React.Fragment key={category.id}>
-          <ListItem disablePadding>
-            <ListItemButton
-              selected={selectedCategory && category.id === selectedCategory.id}
-              onClick={() => onSelectCategory(category)}
-            >
-              <ListItemText primary={category.name} />
-              {hasChildren && (
-                <IconButton
-                  edge="end"
-                  onClick={() => handleToggle(category.id)}
-                >
-                  {isOpen ? <ExpandLess /> : <ExpandMore />}
-                </IconButton>
-              )}
-              {!hasChildren && (
-                <IconButton edge="end">
-                  <ChevronRightIcon />
-                </IconButton>
-              )}
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          {hasChildren && (
-            <Collapse in={isOpen} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                {renderCategories(category.children)}
-              </List>
-            </Collapse>
-          )}
-        </React.Fragment>
-      );
-    });
+  const findCategoryById = (categories, id) => {
+    for (const category of categories) {
+      if (category.id === id) return category;
+      if (category.children) {
+        const found = findCategoryById(category.children, id);
+        if (found) return found;
+      }
+    }
+    return null;
   };
 
   return (
-    <List component="nav" aria-label="categories">
-      {categories.length > 0 ? (
-        renderCategories(categories)
-      ) : (
-        <ListItemText primary="No categories available." />
-      )}
-    </List>
+    <select
+      value={selectedCategory ? selectedCategory.id : ""}
+      onChange={handleChange}
+    >
+      <option value="">Select a Category</option>
+      {renderOptions(categories)}
+    </select>
   );
 };
 
-export default CategoryList;
+export default CategorySelect;
