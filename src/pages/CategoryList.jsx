@@ -40,7 +40,10 @@ const CategoryList = ({ categories, selectedCategory, onSelectCategory }) => {
               {hasChildren && (
                 <IconButton
                   edge="end"
-                  onClick={() => handleToggle(category.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleToggle(category.id);
+                  }}
                 >
                   {isOpen ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>

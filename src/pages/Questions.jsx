@@ -17,7 +17,7 @@ import {
   Home as HomeIcon,
 } from "@mui/icons-material";
 import Constants from "../utils/constants";
-import CategoryList from "./CategoryList"; // Import the CategoryList component
+import CategoryList from "./CategoryList";
 
 const QuestionPage = () => {
   const [categories, setCategories] = useState([]);
@@ -28,10 +28,10 @@ const QuestionPage = () => {
     axios
       .get(`${Constants.API_BASE_URL}/categories`)
       .then((response) => {
-        const fetchedCategories = response.data.data; // Adjust to access 'data' property
+        const fetchedCategories = response.data.data;
         if (Array.isArray(fetchedCategories)) {
           setCategories(fetchedCategories);
-          setSelectedCategory(fetchedCategories[0]); // Select the first category initially
+          setSelectedCategory(fetchedCategories[0]);
         } else {
           console.error("Invalid response format:", fetchedCategories);
         }
@@ -89,7 +89,6 @@ const QuestionPage = () => {
             <HomeIcon />
           </IconButton>
         </Grid>
-        {/* Categories List */}
         <Grid item xs={12} md={3}>
           <Paper elevation={3} sx={{ p: 3, borderRadius: "12px" }}>
             <Typography variant="h5" gutterBottom>
@@ -103,7 +102,6 @@ const QuestionPage = () => {
           </Paper>
         </Grid>
 
-        {/* Questions List */}
         <Grid item xs={12} md={9}>
           <Paper elevation={3} sx={{ p: 3, borderRadius: "12px" }}>
             <Typography variant="h5" gutterBottom>
