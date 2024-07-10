@@ -17,40 +17,39 @@ import {
   Home as HomeIcon,
 } from "@mui/icons-material";
 import Constants from "../utils/constants";
-import CategoryList from "./CategoryList";
 
 const QuestionPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedSubcategory) {
       axios
         .get(
-          `${Constants.API_BASE_URL}/categories/${selectedCategory.id}/questions`
+          `${Constants.API_BASE_URL}/categories/${selectedSubcategory.id}/questions`
         )
         .then((response) => {
           console.log(
-            "Fetched questions for category:",
-            selectedCategory.id,
+            "Fetched questions for subcategory:",
+            selectedSubcategory.id,
             response.data
           );
-          setSelectedCategory((prevCategory) => ({
-            ...prevCategory,
+          setSelectedSubcategory((prevSubcategory) => ({
+            ...prevSubcategory,
             questions: response.data.questions,
           }));
         })
         .catch((error) => {
           console.error(
-            `Error fetching questions for category ${selectedCategory.id}:`,
+            `Error fetching questions for subcategory ${selectedSubcategory.id}:`,
             error
           );
         });
     }
-  }, [selectedCategory]);
+  }, [selectedSubcategory]);
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+  const handleSubcategoryClick = (subcategory) => {
+    setSelectedSubcategory(subcategory);
   };
 
   const handleBackClick = () => {
@@ -79,24 +78,24 @@ const QuestionPage = () => {
         <Grid item xs={12} md={3}>
           <Paper elevation={3} sx={{ p: 3, borderRadius: "12px" }}>
             <Typography variant="h5" gutterBottom>
-              Categories
+              Subcategories
             </Typography>
             <CategoryList
-              selectedCategory={selectedCategory}
-              onSelectCategory={handleCategoryClick}
+              selectedCategory={selectedSubcategory}
+              onSelectCategory={handleSubcategoryClick}
             />
           </Paper>
         </Grid>
         <Grid item xs={12} md={9}>
           <Paper elevation={3} sx={{ p: 3, borderRadius: "12px" }}>
             <Typography variant="h5" gutterBottom>
-              {selectedCategory
-                ? `${selectedCategory.name} Questions`
-                : "Select a Category"}
+              {selectedSubcategory
+                ? `${selectedSubcategory.name} Questions`
+                : "Select a Subcategory"}
             </Typography>
             <List>
-              {selectedCategory && selectedCategory.questions ? (
-                selectedCategory.questions.map((question) => (
+              {selectedSubcategory && selectedSubcategory.questions ? (
+                selectedSubcategory.questions.map((question) => (
                   <React.Fragment key={question.id}>
                     <ListItem>
                       <ListItemText primary={question.text} />
@@ -105,7 +104,7 @@ const QuestionPage = () => {
                   </React.Fragment>
                 ))
               ) : (
-                <ListItemText primary="No questions available for this category." />
+                <ListItemText primary="No questions available for this subcategory." />
               )}
             </List>
           </Paper>
