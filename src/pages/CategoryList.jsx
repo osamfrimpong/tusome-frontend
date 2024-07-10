@@ -24,6 +24,7 @@ const CategoryList = ({ selectedCategory, onSelectCategory }) => {
     axios
       .get(`${Constants.API_BASE_URL}/categories`)
       .then((response) => {
+        console.log("Fetched categories:", response.data);
         const fetchedCategories = response.data.data;
         if (Array.isArray(fetchedCategories)) {
           setCategories(fetchedCategories);
@@ -52,7 +53,10 @@ const CategoryList = ({ selectedCategory, onSelectCategory }) => {
         <ListItem disablePadding>
           <ListItemButton
             selected={selectedCategory && category.id === selectedCategory.id}
-            onClick={() => onSelectCategory(category)}
+            onClick={() => {
+              console.log("Category clicked:", category);
+              onSelectCategory(category);
+            }}
             sx={{ pl: level * 2 }}
           >
             <ListItemText primary={category.name} />

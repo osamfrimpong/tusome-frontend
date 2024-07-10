@@ -30,6 +30,11 @@ const QuestionPage = () => {
           `${Constants.API_BASE_URL}/categories/${selectedCategory.id}/questions`
         )
         .then((response) => {
+          console.log(
+            "Fetched questions for category:",
+            selectedCategory.id,
+            response.data
+          );
           setSelectedCategory((prevCategory) => ({
             ...prevCategory,
             questions: response.data.questions,
@@ -45,14 +50,17 @@ const QuestionPage = () => {
   }, [selectedCategory]);
 
   const handleCategoryClick = (category) => {
+    console.log("Category clicked:", category);
     setSelectedCategory(category);
   };
 
   const handleBackClick = () => {
+    console.log("Back button clicked");
     navigate(-1);
   };
 
   const handleHomeClick = () => {
+    console.log("Home button clicked");
     navigate("/");
   };
 
@@ -82,7 +90,6 @@ const QuestionPage = () => {
             />
           </Paper>
         </Grid>
-
         <Grid item xs={12} md={9}>
           <Paper elevation={3} sx={{ p: 3, borderRadius: "12px" }}>
             <Typography variant="h5" gutterBottom>
