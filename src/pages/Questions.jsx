@@ -25,11 +25,9 @@ const QuestionPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${Constants.API_BASE_URL}/categories`
-        );
+    axios
+      .get(`${Constants.API_BASE_URL}/categories`)
+      .then((response) => {
         const fetchedCategories = response.data.data;
         if (Array.isArray(fetchedCategories)) {
           setCategories(fetchedCategories);
@@ -37,12 +35,10 @@ const QuestionPage = () => {
         } else {
           console.error("Invalid response format:", fetchedCategories);
         }
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchData();
+      });
   }, []);
 
   useEffect(() => {
