@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import ErrorComponent from "../../components/cards/ErrorComponent";
 
 export default function ViewQuestion() {
   const location = useLocation();
@@ -63,6 +64,10 @@ export default function ViewQuestion() {
             </Box>
           ))}
         </Stack>
+      )}
+
+      {!question && (
+        <ErrorComponent title={"Opps"} message={"Invalid Question"} />
       )}
     </Container>
   );

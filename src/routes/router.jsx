@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import Signup from "../pages/auth/Signup";
 import Login from "../pages/auth/Login";
-import Quiz from "../pages/Quiz";
 import Questions from "../pages/Questions";
 import AboutUs from "../pages/AboutUs";
 import ForgotPassword from "../pages/ForgotPassword";
@@ -16,6 +15,7 @@ import ViewCategory from "../pages/landing/ViewCategory";
 import ViewQuestion from "../pages/landing/ViewQuestion";
 import QuizComponent from "../pages/dashboard/QuizComponent";
 import ResultsComponent from "../pages/dashboard/ResultsComponent";
+import CategoryList from "../pages/CategoryList";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/about-us", element: <AboutUs /> },
-      { path: "/quiz", element: <Quiz /> },
+      { path: "/categories", element: <CategoryList /> },
       { path: "/category/view/:categoryId", element: <ViewCategory /> },
       {path: "/question/view/:questionId", element: <ViewQuestion />},
     ],

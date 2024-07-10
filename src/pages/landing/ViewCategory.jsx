@@ -1,4 +1,3 @@
-import { ErrorOutlineRounded } from "@mui/icons-material";
 import {
   Box,
   Card,
@@ -10,6 +9,7 @@ import {
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
+import ErrorComponent from "../../components/cards/ErrorComponent";
 
 export default function ViewCategory() {
   const location = useLocation();
@@ -19,6 +19,7 @@ export default function ViewCategory() {
   return (
     <Container maxWidth="none" sx={{ mt: { xs: 7, sm: 7, md: 8 } }}>
       {category ? (
+        category.questions.length > 0 ? (
         <Box sx={{ display: "flex", flexDirection: "column", mt: 2 }}>
           <Typography sx={{ fontWeight: 800, fontSize: 24 }}>
             Category/Subject: {category.name}
@@ -91,23 +92,11 @@ export default function ViewCategory() {
               </Grid>
             ))}
           </Grid>
-        </Box>
+        </Box>) : (
+           <ErrorComponent title="Oops!" message="No questions found for this category" />
+        )
       ) : (
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <ErrorOutlineRounded
-            sx={{ fontSize: 100, color: "red", alignSelf: "center" }}
-          />
-          <Typography
-            sx={{ fontWeight: 800, fontSize: 24, alignSelf: "center" }}
-          >
-            Oops!
-          </Typography>
-          <Typography
-            sx={{ fontWeight: 400, fontSize: 24, alignSelf: "center" }}
-          >
-            No Category Selected
-          </Typography>
-        </Box>
+        <ErrorComponent title="Oops!" message="No Category Selected" />
       )}
     </Container>
   );

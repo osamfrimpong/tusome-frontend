@@ -21,7 +21,7 @@ import UserProfileDropdown from "../partials/UserProfileDropdown";
 
 const drawerWidth = 240;
 const navItems = [
-  { label: "Quiz", link: "/quiz" },
+  { label: "Categories", link: "/categories" },
   { label: "Questions", link: "/questions" },
   { label: "About Us", link: "/about-us" },
 ];
