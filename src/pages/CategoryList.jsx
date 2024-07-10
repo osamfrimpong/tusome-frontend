@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   List,
   ListItem,
@@ -13,9 +14,27 @@ import {
   ExpandMore,
   ChevronRight as ChevronRightIcon,
 } from "@mui/icons-material";
+import Constants from "../utils/constants";
 
-const CategoryList = ({ categories, selectedCategory, onSelectCategory }) => {
-  const [openCategories, setOpenCategories] = React.useState({});
+const CategoryList = ({ selectedCategory, onSelectCategory }) => {
+  const [categories, setCategories] = useState([]);
+  const [openCategories, setOpenCategories] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`${Constants.API_BASE_URL}/categories`)
+      .then((response) => {
+        const fetchedCategories = response.data.data;
+        if (Array.isArray(fetchedCategories)) {
+          setCategories(fetchedCategories);
+        } else {
+          console.error("Invalid response format:", fetchedCategories);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching categories:", error);
+      });
+  }, []);
 
   const handleToggle = (categoryId) => {
     setOpenCategories((prevOpenCategories) => ({

@@ -20,25 +20,8 @@ import Constants from "../utils/constants";
 import CategoryList from "./CategoryList";
 
 const QuestionPage = () => {
-  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get(`${Constants.API_BASE_URL}/categories`)
-      .then((response) => {
-        const fetchedCategories = response.data.data;
-        if (Array.isArray(fetchedCategories)) {
-          setCategories(fetchedCategories);
-        } else {
-          console.error("Invalid response format:", fetchedCategories);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching categories:", error);
-      });
-  }, []);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -94,7 +77,6 @@ const QuestionPage = () => {
               Categories
             </Typography>
             <CategoryList
-              categories={categories}
               selectedCategory={selectedCategory}
               onSelectCategory={handleCategoryClick}
             />
