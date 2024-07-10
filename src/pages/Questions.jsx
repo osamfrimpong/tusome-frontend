@@ -17,6 +17,7 @@ import {
   Home as HomeIcon,
 } from "@mui/icons-material";
 import Constants from "../utils/constants";
+import CategoryList from "./CategoryList";
 
 const QuestionPage = () => {
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
