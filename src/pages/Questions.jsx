@@ -50,17 +50,14 @@ const QuestionPage = () => {
   }, [selectedCategory]);
 
   const handleCategoryClick = (category) => {
-    console.log("Category clicked:", category);
     setSelectedCategory(category);
   };
 
   const handleBackClick = () => {
-    console.log("Back button clicked");
     navigate(-1);
   };
 
   const handleHomeClick = () => {
-    console.log("Home button clicked");
     navigate("/");
   };
 
