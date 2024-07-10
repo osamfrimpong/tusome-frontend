@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
+
 import {
   Box,
   Container,
@@ -13,7 +13,7 @@ export default function ViewQuestion() {
   const location = useLocation();
   const question = location.state || null;
   const navigate = useNavigate();
-  const theme = useTheme();
+ 
 
   return (
     <Container maxWidth="none" sx={{ mt: { xs: 7, sm: 7, md: 8 }, mb: 5 }}>
