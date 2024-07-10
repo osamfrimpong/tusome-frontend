@@ -28,14 +28,17 @@ class Constants {
     MAIN_TEAL: "#014D4E",
   };
 
-  static API_BASE_URL = "https://tusome-06769d862471.herokuapp.com/api";
 
-  static HIDE_ON_MOBILE = {
-    display: { xs: "none", sm: "none", md: "block" },
-  };
-  static SHOW_ON_MOBILE = {
-    display: { xs: "block", sm: "block", md: "none" },
-  };
+    static API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://tusome-06769d862471.herokuapp.com/api";
+
+    static HIDE_ON_MOBILE = {
+        display: { xs: "none", sm: "none", md: "block"},
+    };
+    static SHOW_ON_MOBILE = {
+        display: { xs: "block", sm: "block", md: "none"},
+    };
+
+ 
 }
 
 export default Constants;
