@@ -17,7 +17,7 @@ import {
   Home as HomeIcon,
 } from "@mui/icons-material";
 import Constants from "../utils/constants";
-import CategorySelect from "./CategorySelect";
+import CategoryList from "./CategoryList";
 
 const QuestionPage = () => {
   const [categories, setCategories] = useState([]);
@@ -93,7 +93,7 @@ const QuestionPage = () => {
             <Typography variant="h5" gutterBottom>
               Categories
             </Typography>
-            <CategorySelect
+            <CategoryList
               categories={categories}
               selectedCategory={selectedCategory}
               onSelectCategory={handleCategoryClick}
